@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyber VPN Store</title>
+
+<style>
+    /* Estilos Gerais */
+    body {
+        background: #0a0a0a;
+        color: #b40606;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+        margin: 0;
+    }
+
+    /* Classe para esconder as páginas */
+    .hidden {
+        display: none !important;
+    }
+
+    header {
+        padding: 40px;
+        font-size: 25px;
+        color: #ff00ff;
+        text-shadow: 0 0 10px #ff00ff;
+    }
+
+    .titulo {
+        color: #156fa3;
+        text-shadow: 0 0 10px #ff00ff;
+        font-size: 2.5rem;
+    }
+
+    .paragrafo1 {
+        font-size: 1.25rem;
+        color: #a50575;
+        margin-top: 10px;
+        font-size: 120%;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    /* Estilo dos Cards Principais */
+    .card, .card1 {
+        width: 200px;
+        padding: 30px;
+        border: 1px solid #00ffee;
+        border-radius: 10px;
+        text-decoration: none;
+        color: #00ffee;
+        transition: 0.3s;
+        box-shadow: 0 0 10px #00ffee;
+        cursor: pointer;
+        background: transparent;
+    }
+
+    .card:hover, .card1:hover {
+        background: #00ffee;
+        color: #000;
+        transform: scale(1.1);
+    }
+
+    /* SERVIÇOS ADICIONAIS */
+    .servicos { margin-top: 60px; }
+    .servicos h2 { color: #00ffee; margin-bottom: 20px; }
+
+    .servico-card {
+        width: 220px;
+        padding: 25px;
+        border: 1px solid #ff00ff;
+        border-radius: 10px;
+        text-decoration: none;
+        color: #ff00ff;
+        transition: 0.3s;
+        box-shadow: 0 0 10px #ff00ff;
+    }
+
+    .servico-card:hover {
+        background: #ff00ff;
+        color: black;
+        transform: scale(1.05);
+    }
+
+    /* Estilos Comuns para Subpáginas */
+    .subpage-header h1 { color: #00ffff; font-size: 40px; text-shadow: 0 0 20px #00ffff; }
+    .subpage-header p { color: #aaa; max-width: 900px; margin: auto; line-height: 1.6; }
+    
+    .buy-btn {
+        display: block;
+        padding: 12px;
+        margin-top: 15px;
+        border-radius: 6px;
+        background: #ff00ff;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 0 10px #ff00ff;
+        transition: 0.3s;
+    }
+
+    .buy-btn:hover { background: #00ffff; color: black; }
+
+    .back-btn {
+        display: inline-block;
+        margin-top: 40px;
+        padding: 12px 20px;
+        background: #00ffff;
+        color: black;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .packages-grid {
+        max-width: 1000px;
+        margin: auto;
+        padding: 60px 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 30px;
+    }
+
+    .pkg-card {
+        background: #0a0a20;
+        border-radius: 10px;
+        padding: 30px;
+        text-align: center;
+        border: 1px solid #00ffff;
+        box-shadow: 0 0 10px #00ffff;
+        transition: 0.3s;
+        color: white;
+    }
+
+    .pkg-card:hover { transform: translateY(-10px); box-shadow: 0 0 25px #ff00ff; border: 1px solid #ff00ff; }
+    .pkg-card h2 { color: #00ffff; margin-top: 0; }
+    .pkg-card .price { font-size: 30px; color: #ff00ff; margin: 15px 0; }
+    .pkg-card .features { font-size: 14px; color: #bbb; margin-bottom: 20px; }
+    .pkg-card.test-highlight { border: 2px solid #00ff99; box-shadow: 0 0 20px #00ff99; }
+
+    footer {
+        margin-top: 60px;
+        padding: 20px;
+        border-top: 1px solid #00ffee;
+        color: #777;
+    }
+
+    .whatsapp {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #25d366;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 0 10px #25d366;
+        z-index: 100;
+    }
+
+    /* Estilo para um texto muito simples e limpo */
+.texto-simples {
+    color: #cccccc;          /* Cinza claro para não agredir os olhos */
+    font-size: 15px;         /* Tamanho padrão legível */
+    line-height: 1.6;        /* Espaçamento entre linhas para não sufocar o texto */
+    max-width: 800px;        /* Limita a largura para não esticar demais em telas grandes */
+    margin: 20px auto;       /* Centraliza o bloco de texto */
+    text-align: center;      /* Mantém o alinhamento centralizado */
+    font-weight: normal;     /* Remove negritos desnecessários */
+    text-shadow: none;       /* Remove brilhos ou sombras neon */
+}
+</style>
+</head>
+
+<body>
+
+<section id="home">
+    <header>
+        <h1 class="titulo">LOJA PROMO</h1>
+        <p class="paragrafo1">Configs Premium de VPNs</p>
+        <p style="font-size: 1.5rem; color: #cc099b; padding: 10px;">Escolhe o VPN que pretende comprar o seu arquivo para teres uma conexão super rápida e estável</p>
+    </header>
+
+    <div class="container">
+        <div class="card" onclick="abrirCustom()">
+            <h2>HTTP Custom</h2>
+        </div>
+
+        <div class="card" onclick="abrirDark()">
+            <h2>Dark Tunnel</h2>
+        </div>
+        
+        <div class="card" onclick="abrirInjector()">
+            <h2>HTTP Injector</h2>
+        </div>
+        
+        <div class="card" onclick="abrirLoja()">
+            <h2>HTTP Tunnel</h2>
+        </div>
+
+        <div class="card" onclick="abrirAustro()">
+            <h2>Austroplus VPN</h2>
+        </div>
+    </div>
+
+<section class="servicos">
+        <h2>BIG NEYZ PROMO</h2>
+        <div class="container">
+            <a class="servico-card" href="https://wa.me/258858222129?text=Curso%20de%20Cria%C3%A7%C3%A3o%20de%20VPN">
+                <h3>CURSO DE CRIAÇÃO DE VPN</h3>
+                <p>Aprenda a criar e configurar suas próprias VPNs</p>
+                <p>Por apenas 150MTs</p>
+            </a>
+            
+            <a class="servico-card" href="https://wa.me/258858222129?text=Quero%20o%20Curso%20de%20Cria%C3%A7%C3%A3o%20de%20Arquivos">
+                <h3>CURSO DE CRIAÇÃO DE ARQUIVOS</h3>
+                <P>Cria os seus arquivos de VPN para Vodacom  & Tmcel</P>
+                <p>Com SNI Disponivel</p>
+                <p>Por apenas 55MTs</p>
+            </a>
+
+            <a class="servico-card" href="https://wa.me/258858222129?text=Quero%20o%20SNI%20Ilimitado">
+                <h3>SNI ILIMITADO</h3>
+                <p>Receba agora o seu SNI ILIMITADO</p>
+                <p>Por apenas 250MTs</p>
+            </a>
+
+            <a class="servico-card" href="https://wa.me/258858222129?text=Quero%20comprar%20acesso%20ao%20Grupo%20Hacker">
+                <h3>GRUPO HACKER PREMIUM</h3>
+                <P>Acesso antecipado de qualquer projeco & recursos Premium</P>
+                <p>Por apenas 150MTs</p>
+            </a>
+        </div>
+    </section>
+    
+    <p style="margin-top:50px;color:#00ffee;font-size:18px;max-width:800px;margin-left:auto;margin-right:auto;">
+
+Garanta agora acesso às melhores configurações de VPN, cursos exclusivos e ferramentas avançadas para melhorar a sua conexão.  
+Nossa plataforma oferece soluções confiáveis, rápidas e atualizadas para garantir estabilidade e desempenho máximo na sua internet.  
+Entre em contato conosco e comece hoje mesmo a aproveitar uma experiência de conexão superior.
+
+</p>
+
+    <footer>
+        <p><b>LOJA PROMO</b></p>
+        <p>Configs VPN • Cursos • Servidores Premium</p>
+        <p>© 2026 Todos direitos reservados</p>
+    </footer>
+</section>
+
+
+<section id="loja" class="hidden">
+    <header class="subpage-header">
+        <h1>Pacotes HTTP Tunnel</h1>
+        <p class="texto-simples">
+    Escolha o pacote que melhor se adapta às suas necessidades e aproveite uma conexão rápida, estável e segura com nossos arquivos otimizados para HTTP Tunnel. 
+    Cada pacote foi preparado para oferecer bom desempenho e facilidade de uso, garantindo uma experiência de navegação confiável. 
+    Após selecionar o pacote, você será direcionado ao WhatsApp para finalizar a compra.
+</p>
+    </header>
+    <div class="packages-grid">
+        <div class="pkg-card">
+            <h2>Diário</h2>
+            <div class="price">20MTs</div>
+            <p>24 horas de acesso</p>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%20pacote%20diario%20HTTP%20Tunnel">Comprar</a>
+        </div>
+        <div class="pkg-card">
+            <h2>Semanal</h2>
+            <div class="price">40MTs</div>
+            <p>7 dias de acesso</p>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%20pacote%20semanal%20HTTP%20Tunnel">Comprar</a>
+        </div>
+        <div class="pkg-card">
+            <h2>Mensal</h2>
+            <div class="price">100MTs</div>
+            <p>30 dias premium</p>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%20pacote%20mensal%20HTTP%20Tunnel">Comprar</a>
+        </div>
+    </div>
+    <div style="text-align:center"><a class="back-btn" onclick="voltarHome()">← Voltar para Loja</a></div>
+    <footer>© 2026 LOJA PROMO</footer>
+</section>
+
+
+<section id="injector" class="hidden">
+    <header class="subpage-header">
+        <h1>Pacotes Dos Arquivos do HTTP Injector</h1>
+        <p class="texto-simples">
+    Escolha o pacote que melhor se adapta às suas necessidades e aproveite uma conexão rápida, estável e segura com nossos arquivos otimizados para HTTP Tunnel. 
+    Cada pacote foi preparado para oferecer bom desempenho e facilidade de uso, garantindo uma experiência de navegação confiável. 
+    Após selecionar o pacote, você será direcionado ao WhatsApp para finalizar a compra.
+</p>
+    </header>
+    <section class="packages-grid">
+        <div class="pkg-card">
+            <h2>Teste</h2>
+            <div class="price">3 Horas</div>
+            <div class="features">Teste gratuito</div>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%20teste%203h%20HTTP%20Custom">Pedir Teste</a></div>
+        <div class="pkg-card">
+            <h2>Diário</h2>
+            <div class="price">20MTs</div>
+            <div class="features">24 horas</div>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%20comprar%20pacote%20diario%20HTTP%20Tunnel">Comprar</a>
+        </div>
+        <div class="pkg-card">
+            <h2>Semanal</h2>
+            <div class="price">40MTs</div>
+            <div class="features">7 dias</div>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%20comprar%20pacote%20semanal%20HTTP%20Tunnel">Comprar</a>
+        </div>
+        <div class="pkg-card">
+            <h2>Mensal</h2>
+            <div class="price">100MTs</div>
+            <div class="features">30 dias</div>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%20comprar%20pacote%20mensal%20HTTP%20Tunnel">Comprar</a>
+        </div>
+    </section>
+    <div style="text-align:center"><a class="back-btn" onclick="voltarHome()">← Voltar para Loja</a></div>
+    <footer>© 2026 LOJA PROMO</footer>
+</section>
+
+
+<section id="custom" class="hidden">
+    <header class="subpage-header">
+        <h1>Pacotes Dos Arquivos do HTTP Custom</h1>
+        <p class="texto-simples">
+    Escolha o pacote que melhor se adapta às suas necessidades e aproveite uma conexão rápida, estável e segura com nossos arquivos otimizados para HTTP Tunnel. 
+    Cada pacote foi preparado para oferecer bom desempenho e facilidade de uso, garantindo uma experiência de navegação confiável. 
+    Após selecionar o pacote, você será direcionado ao WhatsApp para finalizar a compra.
+</p>
+    </header>
+    <section class="packages-grid">
+        <div class="pkg-card">
+            <h2>Teste</h2>
+            <div class="price">3 Horas</div>
+            <div class="features">Teste gratuito</div>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%20teste%203h%20HTTP%20Custom">Pedir Teste</a>
+        </div>
+        <div class="pkg-card">
+            <h2>Diário</h2>
+            <div class="price">20MTs</div>
+            <div class="features">24 horas</div>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%20comprar%20pacote%20diario%20HTTP%20Tunnel">Comprar</a>
+        </div>
+        <div class="pkg-card">
+            <h2>Semanal</h2>
+            <div class="price">40MTs</div>
+            <div class="features">7 dias</div>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%20comprar%20pacote%20semanal%20HTTP%20Tunnel">Comprar</a>
+        </div>
+        <div class="pkg-card">
+            <h2>Mensal</h2>
+            <div class="price">100MTs</div>
+            <div class="features">30 dias</div>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%２０comprar%２０pacote%２０mensal%２０HTTP%２０Tunnel">Comprar</a>
+        </div>
+    </section>
+    <div style="text-align:center"><a class="back-btn" onclick="voltarHome()">← Voltar para Loja</a></div>
+    <footer>© 2026 LOJA PROMO</footer>
+</section>
+
+
+<section id="dark" class="hidden">
+    <header class="subpage-header">
+        <h1>Pacotes Dos Arquivos do Dark Tunnel</h1>
+        <p class="texto-simples">
+    Escolha o pacote que melhor se adapta às suas necessidades e aproveite uma conexão rápida, estável e segura com nossos arquivos otimizados para HTTP Tunnel. 
+    Cada pacote foi preparado para oferecer bom desempenho e facilidade de uso, garantindo uma experiência de navegação confiável. 
+    Após selecionar o pacote, você será direcionado ao WhatsApp para finalizar a compra.
+</p>
+    </header>
+    <section class="packages-grid">
+        <div class="pkg-card">
+            <h2>Diário</h2>
+            <div class="price">20MTs</div>
+            <div class="features">24 horas</div>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%20comprar%20pacote%20diario%20HTTP%20Tunnel">Comprar</a>
+        </div>
+        <div class="pkg-card">
+            <h2>Semanal</h2>
+            <div class="price">40MTs</div>
+            <div class="features">7 dias</div>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%20comprar%20pacote%20semanal%20HTTP%20Tunnel">Comprar</a>
+        </div>
+        <div class="pkg-card">
+            <h2>Mensal</h2>
+            <div class="price">100MTs</div>
+            <div class="features">30 dias</div>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%20comprar%20pacote%20mensal%20HTTP%20Tunnel">Comprar</a>
+        </div>
+    </section>
+    <div style="text-align:center"><a class="back-btn" onclick="voltarHome()">← Voltar para Loja</a></div>
+    <footer>© 2026 LOJA PROMO</footer>
+</section>
+
+
+<section id="austro" class="hidden">
+    <header class="subpage-header">
+        <h1>Pacotes Dos Arquivos do Austroplus VPN</h1>
+        <p class="texto-simples">
+    Escolha o pacote que melhor se adapta às suas necessidades e aproveite uma conexão rápida, estável e segura com nossos arquivos otimizados para HTTP Tunnel. 
+    Cada pacote foi preparado para oferecer bom desempenho e facilidade de uso, garantindo uma experiência de navegação confiável. 
+    Após selecionar o pacote, você será direcionado ao WhatsApp para finalizar a compra.
+</p>
+    </header>
+    <section class="packages-grid">
+        <div class="pkg-card">
+            <h2>Diário</h2>
+            <div class="price">20MTs</div>
+            <div class="features">Acesso por 24 horas</div>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%20comprar%20pacote%20diario%20HTTP%20Tunnel">Comprar</a>
+        </div>
+        <div class="pkg-card">
+            <h2>Semanal</h2>
+            <div class="price">40MTs</div>
+            <div class="features">7 dias de acesso completo</div>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%20comprar%20pacote%20semanal%20HTTP%20Tunnel">Comprar</a>
+        </div>
+        <div class="pkg-card">
+            <h2>Mensal</h2>
+            <div class="price">100MTs</div>
+            <div class="features">30 dias acesso premium</div>
+            <a class="buy-btn" href="https://wa.me/258858222129?text=Quero%20comprar%20pacote%20mensal%20HTTP%20Tunnel">Comprar</a>
+        </div>
+    </section>
+    <div style="text-align:center"><a class="back-btn" onclick="voltarHome()">← Voltar para Loja</a></div>
+    <footer>© 2026 LOJA PROMO</footer>
+</section>
+
+
+<a class="whatsapp" href="https://wa.me/258858222129">Contacte-nos</a>
+
+<script>
+    function esconderTodas() {
+        document.getElementById("home").classList.add("hidden");
+        document.getElementById("loja").classList.add("hidden");
+        document.getElementById("injector").classList.add("hidden");
+        document.getElementById("custom").classList.add("hidden");
+        document.getElementById("dark").classList.add("hidden");
+        document.getElementById("austro").classList.add("hidden");
+    }
+
+    function abrirLoja() { esconderTodas(); document.getElementById("loja").classList.remove("hidden"); window.scrollTo(0, 0); }
+    function abrirInjector() { esconderTodas(); document.getElementById("injector").classList.remove("hidden"); window.scrollTo(0, 0); }
+    function abrirCustom() { esconderTodas(); document.getElementById("custom").classList.remove("hidden"); window.scrollTo(0, 0); }
+    function abrirDark() { esconderTodas(); document.getElementById("dark").classList.remove("hidden"); window.scrollTo(0, 0); }
+    function abrirAustro() { esconderTodas(); document.getElementById("austro").classList.remove("hidden"); window.scrollTo(0, 0); }
+    function voltarHome() { esconderTodas(); document.getElementById("home").classList.remove("hidden"); window.scrollTo(0, 0); }
+</script>
+
+</body>
+</html>

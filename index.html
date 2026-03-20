@@ -3,50 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Netstream TV - Aviso</title>
+<title>Manutenção - Streaming Online</title>
 
 <style>
-    body {
+    * {
         margin: 0;
-        font-family: Arial, sans-serif;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
         background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
         color: #fff;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
+        overflow: hidden;
     }
 
     .container {
-        background: rgba(0, 0, 0, 0.7);
-        padding: 40px;
-        border-radius: 15px;
         text-align: center;
-        max-width: 500px;
-        box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        animation: fadeIn 1s ease-in-out;
+        max-width: 700px;
+        padding: 40px;
+        background: rgba(0,0,0,0.6);
+        border-radius: 20px;
+        box-shadow: 0 0 30px rgba(0,0,0,0.8);
+        animation: fadeIn 2s ease;
     }
 
     h1 {
-        color: #00d4ff;
+        font-size: 2.5em;
         margin-bottom: 20px;
+        color: #00d4ff;
     }
 
     p {
-        font-size: 16px;
-        line-height: 1.6;
+        font-size: 1.1em;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        color: #ddd;
+    }
+
+    .highlight {
+        color: #00d4ff;
+        font-weight: bold;
     }
 
     .loader {
-        margin-top: 30px;
-        border: 5px solid rgba(255,255,255,0.2);
-        border-top: 5px solid #00d4ff;
+        margin: 30px auto;
+        width: 60px;
+        height: 60px;
+        border: 6px solid rgba(255,255,255,0.2);
+        border-top: 6px solid #00d4ff;
         border-radius: 50%;
-        width: 40px;
-        height: 40px;
         animation: spin 1s linear infinite;
-        margin-left: auto;
-        margin-right: auto;
+    }
+
+    .footer {
+        margin-top: 20px;
+        font-size: 0.9em;
+        color: #aaa;
+    }
+
+    button {
+        margin-top: 15px;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 30px;
+        background: #00d4ff;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #00aacc;
+        transform: scale(1.05);
     }
 
     @keyframes spin {
@@ -55,39 +90,58 @@
     }
 
     @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    .footer {
-        margin-top: 20px;
-        font-size: 12px;
-        color: #aaa;
+        from {opacity: 0; transform: translateY(30px);}
+        to {opacity: 1; transform: translateY(0);}
     }
 </style>
-
 </head>
+
 <body>
 
 <div class="container">
-    <h1>Netstream TV</h1>
+    <h1>Estamos Temporariamente Indisponíveis</h1>
 
     <p>
-        Pedimos desculpa pelo inconveniente.<br><br>
-        A nossa equipa técnica está a trabalhar para resolver alguns problemas no sistema.
+        Pedimos sinceras desculpas pelo inconveniente. A nossa plataforma de 
+        <span class="highlight">Netstream TV</span> encontra-se em manutenção neste momento.
     </p>
 
     <p>
-        Pedimos a sua paciência enquanto melhoramos a experiência do aplicativo.
-        Em breve estaremos de volta com novidades e um serviço ainda melhor.
+        Estamos a trabalhar intensamente para melhorar a estabilidade, desempenho e qualidade do serviço. 
+        O nosso objetivo é oferecer uma experiência mais rápida, segura e profissional para todos os utilizadores.
+    </p>
+
+    <p>
+        Sabemos o quanto o entretenimento é importante para si, e por isso a nossa equipa técnica está dedicada 
+        a resolver todas as questões no menor tempo possível.
     </p>
 
     <div class="loader"></div>
 
+    <p>
+        Prometemos voltar em breve com novidades, melhorias significativas e um sistema ainda mais completo.
+    </p>
+
+    <button onclick="reloadPage()">Tentar Novamente</button>
+
     <div class="footer">
-        Obrigado pela compreensão 💙
+        © 2026 Streaming Online • Todos os direitos reservados
     </div>
 </div>
+
+<script>
+    function reloadPage() {
+        location.reload();
+    }
+
+    // Simulação de mensagem dinâmica
+    setTimeout(() => {
+        const msg = document.createElement("p");
+        msg.innerHTML = "Atualização em progresso... Obrigado pela sua paciência.";
+        msg.style.color = "#00d4ff";
+        document.querySelector(".container").appendChild(msg);
+    }, 4000);
+</script>
 
 </body>
 </html>

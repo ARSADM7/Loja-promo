@@ -1,35 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>PWA Task Manager</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#3b82f6">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%233b82f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='280' fill='white' font-weight='bold'%3E✓%3C/text%3E%3C/svg%3E">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>IPTV - ROOM Futebol & Canais Online</title>
+<link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css">
+<!-- Dentro do <head> -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#e50914">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%23e50914'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='280' fill='white' font-weight='bold'%3E📺%3C/text%3E%3C/svg%3E">
 </head>
 <body>
-  <div class="container">
-    <h1>📋 Minhas Tarefas</h1>
-    <div class="add-task">
-      <input type="text" id="taskInput" placeholder="Nova tarefa...">
-      <button id="addTaskBtn">+ Adicionar</button>
+
+<!-- TOAST -->
+<div id="toast-message" class="toast-message">
+    <div class="toast-header"><h4>Bem-vindo ao IPTV-ROOM</h4><button class="toast-close" onclick="fecharToast()">✕</button></div>
+    <div class="toast-body">
+        <p>📺 <span class="highlight">IPTV-ROOM</span> — Plataforma completa de entretenimento digital.</p>
+        <p>⚠️ <strong>AVISO:</strong> O acesso será limitado em breve.<br>Acesso atual por <strong>subscrição</strong>.</p>
+        <p>📞 Suporte 24/7 via WhatsApp</p>
+        <small>✨ IPTV-ROOM — Qualidade, estabilidade e evolução contínua.</small>
     </div>
-    <ul id="taskList"></ul>
-    <p class="offline-status">✅ Você está online</p>
-  </div>
-  <script src="app.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then(reg => console.log('Service Worker registrado', reg))
-          .catch(err => console.log('Erro:', err));
-      });
-    }
-  </script>
+    <div class="toast-footer"><button class="btn-toast" onclick="fecharToast()">▶ Continuar</button></div>
+    <div class="toast-timer" id="toast-timer"></div>
+</div>
+
+<a href="https://chat.whatsapp.com/JY3Vs90yXbl0SlzFUNeP7Y?mode=gi_t" class="whatsapp-float" id="whatsapp-float" target="_blank">
+    <svg width="35" height="35" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
+</a>
+
+<!-- LOGIN -->
+<div id="login-screen">
+    <div class="login-box">
+        <h2>🔐 IPTV-ROOM</h2>
+        <input type="email" id="email-login" placeholder="Seu e-mail cadastrado" autocomplete="email">
+        <input type="password" id="password-login" placeholder="Sua senha" autocomplete="current-password">
+        <div id="login-error" class="error-message"></div>
+        <button class="btn-cyber btn-entrar" onclick="tentarLoginFirebase()">Entrar</button>
+        <button class="btn-cyber btn-comprar" onclick="abrirPrecos()">Comprar Acesso</button>
+    </div>
+</div>
+
+<div id="price-modal"><div class="purchase-content"><h3 style="text-align:center; color:var(--cyber-blue)">TABELA DE PREÇOS</h3><table class="price-table"><thead><tr><th>Plano</th><th>Preço</th><th>Ação</th></tr></thead><tbody><tr><td>Diário</td><td>35 MT</td><td><button class="btn-select-price" onclick="irParaPagamento()">Escolher</button></td></tr><tr><td>Semanal</td><td>110 MT</td><td><button class="btn-select-price" onclick="irParaPagamento()">Escolher</button></td></tr><tr><td>Mensal</td><td>200 MT</td><td><button class="btn-select-price" onclick="irParaPagamento()">Escolher</button></td></tr></tbody></table><button onclick="fecharPrecos()" style="margin-top:15px; width:100%; border:none; padding:10px; background:#444; color:#fff; border-radius:5px; cursor:pointer;">Voltar</button></div></div>
+<div id="purchase-modal"><div class="purchase-content"><h3 style="text-align:center; color:var(--cyber-pink)">MÉTODO DE PAGAMENTO</h3><div class="payment-grid"><div class="payment-card"><h4 style="color:#ffb900">♛BIG NEYZ♛</h4><p>Sergio</p><small>E-mpesa: 258855797167</small><br><small>Emola: 258871701944</small><a href="https://wa.me/258858222129?text=Confirmação de pagamento" class="btn-wa">Confirmar</a></div><div class="payment-card"><h4 style="color:var(--cyber-blue)">♛ARSADM♛</h4><p>Alegre</p><small>E-mpesa: 258844744484</small><br><small>Emola: 258870794125</small><a href="https://wa.me/258844744484?text=Confirmação de pagamento" class="btn-wa">Confirmar</a></div></div><button onclick="fecharCompra()" style="margin-top:15px; width:100%; border:none; padding:10px; background:#444; color:#fff; border-radius:5px; cursor:pointer;">Cancelar</button></div></div>
+
+<div id="loading-screen" style="display:none; position:fixed; inset:0; background:#000; z-index:6000; justify-content:center; align-items:center; flex-direction:column; color:#00f2ff;"><div class="loader"></div><p id="loading-text">Loading...</p></div>
+
+<!-- MAIN APP -->
+<div id="main-app" style="display:none; flex-direction:column; height:100%;">
+    <header><div class="header-left"><h1>IPTV-ROOM</h1></div><button class="btn-logout" onclick="logoutFirebase()">Sair</button></header>
+    <div class="container">
+        <div class="player-container"><video id="main-player" class="video-js vjs-big-play-centered" controls preload="auto"><p class="vjs-no-js">Ative JavaScript</p></video></div>
+        <div class="category-section"><h2 class="category-title">Filmes & Séries <span onclick="abrirModal('filmes-series')">Mais</span></h2><div class="channels-grid" id="grid-filmes-series"></div></div>
+        <div class="category-section"><h2 class="category-title">Futebol & Esportes <span onclick="abrirModal('esportes')">Mais</span></h2><div class="channels-grid" id="grid-esportes"></div></div>
+        <div class="category-section"><h2 class="category-title">Notícias <span onclick="abrirModal('noticias')">Mais</span></h2><div class="channels-grid" id="grid-noticias"></div></div>
+        <div class="category-section"><h2 class="category-title">Entretenimento <span onclick="abrirModal('variedades')">Mais</span></h2><div class="channels-grid" id="grid-variedades"></div></div>
+        <div class="category-section"><h2 class="category-title">Infantil <span onclick="abrirModal('infantil')">Mais</span></h2><div class="channels-grid" id="grid-infantil"></div></div>
+        <div class="category-section"><h2 class="category-title">Documentário <span onclick="abrirModal('documentario')">Mais</span></h2><div class="channels-grid" id="grid-documentario"></div></div>
+        <div class="category-section"><h2 class="category-title">Nacionais <span onclick="abrirModal('nacionais')">Mais</span></h2><div class="channels-grid" id="grid-nacionais"></div></div>
+        <div class="category-section"><h2 class="category-title">Musica <span onclick="abrirModal('musica')">Mais</span></h2><div class="channels-grid" id="grid-musica"></div></div>
+        <div class="category-section"><h2 class="category-title">Teste <span onclick="abrirModal('24h')">Mais</span></h2><div class="channels-grid" id="grid-24h"></div></div>
+        <div class="category-section"><h2 class="category-title">Todos os Canais</h2><div class="channels-grid" id="grid-todos"></div></div>
+        <footer>© 2026 IPTV-ROOM App</footer>
+    </div>
+</div>
+
+<div id="modal" class="modal"><div class="modal-close" onclick="fecharModal()">×</div><div class="modal-content" id="modal-content"></div></div>
+
+<script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+<script type="module" src="script.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('✅ Service Worker registrado', reg))
+        .catch(err => console.log('❌ Erro SW:', err));
+    });
+  }
+</script>
 </body>
 </html>

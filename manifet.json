@@ -1,0 +1,28 @@
+{
+  "name": "Ultra Cine",
+  "short_name": "UltraCine",
+  "description": "Assista séries e filmes com player integrado e suporte offline",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#F97316",
+  "background_color": "#030712",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [],
+  "categories": ["entertainment", "video"],
+  "lang": "pt-BR"
+}

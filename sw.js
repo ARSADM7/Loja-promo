@@ -1,14 +1,13 @@
-const CACHE_NAME = 'iptv-room-v1';
+const CACHE_NAME = 'ultracine-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/style.css',
-  '/script.js',
+  '/filmes.js',
   '/manifest.json',
-  '/canais.json'
+  '/icon.svg'
 ];
 
-// Instalação – armazena os arquivos essenciais
+// Instalação: cache dos assets principais
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
@@ -16,31 +15,30 @@ self.addEventListener('install', event => {
   self.skipWaiting();
 });
 
-// Ativação – limpa caches antigos
+// Ativação: limpa caches antigos
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(
-      keys.map(key => {
-        if (key !== CACHE_NAME) return caches.delete(key);
-      })
-    ))
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.filter(name => name !== CACHE_NAME).map(name => caches.delete(name))
+      );
+    })
   );
   self.clients.claim();
 });
 
-// Estratégia: network first, depois cache (para streams não é tão útil, mas o app base fica off)
+// Estratégia de fetch: stale-while-revalidate para assets, network-first para filmes.js, apenas rede para vídeos
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
-
-  // Não tentar cachear streams .m3u8 ou URLs externas de vídeo
-  if (url.pathname.endsWith('.m3u8') || url.href.includes('amagi.tv') || url.href.includes('.m3u8')) {
-    // Para streams, sempre buscar da rede sem cache
+  
+  // Para vídeos (MP4, M3U8, etc) – nunca cache, apenas rede
+  if (url.pathname.endsWith('.mp4') || url.pathname.endsWith('.m3u8') || url.pathname.includes('/film/')) {
     event.respondWith(fetch(event.request));
     return;
   }
 
-  // Para arquivos estáticos do app e canais.json – cache first ou network first
-  if (urlsToCache.includes(url.pathname) || url.pathname === '/canais.json') {
+  // Para filmes.js (catálogo) – prioriza rede, fallback para cache
+  if (url.pathname.endsWith('/filmes.js')) {
     event.respondWith(
       fetch(event.request)
         .then(response => {
@@ -50,7 +48,20 @@ self.addEventListener('fetch', event => {
         })
         .catch(() => caches.match(event.request))
     );
-  } else {
-    event.respondWith(fetch(event.request));
+    return;
   }
+
+  // Para os demais assets (HTML, CSS, JS, ícones) – stale-while-revalidate
+  event.respondWith(
+    caches.match(event.request).then(cachedResponse => {
+      const fetchPromise = fetch(event.request).then(networkResponse => {
+        if (networkResponse && networkResponse.status === 200) {
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, networkResponse.clone()));
+        }
+        return networkResponse;
+      }).catch(() => null);
+      
+      return cachedResponse || fetchPromise;
+    })
+  );
 });

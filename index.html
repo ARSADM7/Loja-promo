@@ -3,1047 +3,1071 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#F97316">
+    <meta name="theme-color" content="#e8700a">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Ultra Cine">
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/svg+xml" href="icon.svg">
-    <link rel="apple-touch-icon" href="icon.svg">
-    <title>Ultra Cine · Séries e Filmes</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+    <link rel="apple-touch-icon" href="icon-512.png">
+    <title>Ultra Cine · Realme Note 60X</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
-        /* ========== RESET & BASE ========== */
-        *, *::before, *::after {
+        /* ========== RESET E VARIÁVEIS ========== */
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-dark: #0a0a0a;
+            --card-bg: #141414;
+            --accent: #e8700a;
+            --accent-light: #f5c842;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: rgba(255,255,255,0.08);
+            --surface: #111827;
+            --surface-2: #1e293b;
+            --surface-3: #0f172a;
+        }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: radial-gradient(circle at 10% 20%, #030712, #000);
-            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
             min-height: 100vh;
             overflow-x: hidden;
             touch-action: pan-x pan-y;
-            -webkit-tap-highlight-color: transparent;
         }
 
-        /* ========== LOGIN ========== */
-        .login-screen {
-            position: fixed;
-            inset: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(ellipse at 30% 40%, #0f172a, #020617);
-            backdrop-filter: blur(2px);
-            z-index: 9999;
-        }
-
-        .login-box {
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 2rem;
-            padding: 2.5rem 2rem;
-            width: 340px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5);
-        }
-
-        .login-box h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2rem;
-            background: linear-gradient(135deg, #EAB308, #F97316);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 1rem;
-        }
-
-        .login-box input {
-            width: 100%;
-            padding: 12px 16px;
-            margin: 12px 0;
-            border: none;
-            background: #1e293b;
-            border-radius: 40px;
-            color: #fff;
-            font-size: 1rem;
-            outline: none;
-            border: 1px solid #334155;
-            transition: all 0.2s;
-        }
-
-        .login-box input:focus {
-            border-color: #F97316;
-            box-shadow: 0 0 8px rgba(249, 115, 22, 0.5);
-        }
-
-        .login-btn {
-            background: linear-gradient(90deg, #F97316, #EAB308);
-            border: none;
-            padding: 12px;
-            width: 100%;
-            border-radius: 40px;
-            font-weight: 700;
-            color: #0f172a;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
-            margin-top: 8px;
-        }
-
-        .login-btn:hover {
-            transform: scale(1.03);
-            filter: brightness(1.1);
-        }
-
-        .login-text {
-            margin-top: 20px;
-            font-size: 0.75rem;
-            color: #94a3b8;
-        }
-
-        .whatsapp-link {
-            margin: 15px 0 5px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #1f2a3e;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: #f1f5f9;
-            text-decoration: none;
-        }
-
-        .whatsapp-link i {
-            color: #25D366;
-            font-size: 1.2rem;
-        }
-
-        .whatsapp-link:hover {
-            background: #2d3a4e;
-        }
-
-        /* ========== APP ========== */
-        .app {
-            display: none;
-            min-height: 100vh;
-            background: linear-gradient(145deg, #030712 0%, #0a0f1c 100%);
-        }
-
-        /* Topbar */
-        .topbar {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 20px;
-            background: rgba(2, 6, 23, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .menu-btn {
-            font-size: 1.6rem;
-            cursor: pointer;
-            background: #1e293b;
-            width: 42px;
-            height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.2s;
-            color: #f1f5f9;
-            user-select: none;
-        }
-
-        .menu-btn:hover {
-            background: #F97316;
-            color: #000;
-        }
-
-        .search {
-            flex: 1;
-            background: #111827;
-            border: none;
-            padding: 12px 18px;
-            border-radius: 44px;
-            color: #fff;
-            font-size: 0.9rem;
-            border: 1px solid #2d3a4e;
-            outline: none;
-            transition: all 0.2s;
-        }
-
-        .search:focus {
-            border-color: #F97316;
-            box-shadow: 0 0 8px rgba(249, 115, 22, 0.3);
-        }
-
-        .search::placeholder {
-            color: #64748b;
-        }
-
-        .logo-icon {
-            font-size: 24px;
-            color: #F97316;
-            filter: drop-shadow(0 0 6px rgba(249, 115, 22, 0.5));
-        }
-
-        /* Categorias topo */
-        .categorias-topo {
-            display: flex;
-            overflow-x: auto;
-            gap: 10px;
-            padding: 14px 20px;
-            background: rgba(0, 0, 0, 0.2);
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            white-space: nowrap;
-        }
-
-        .categorias-topo::-webkit-scrollbar {
-            display: none;
-        }
-
-        .categorias-topo button {
-            background: #1e293b;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 40px;
-            font-weight: 500;
-            font-size: 0.85rem;
-            color: #e2e8f0;
-            white-space: nowrap;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid transparent;
-        }
-
-        .categorias-topo button.active-cat,
-        .categorias-topo button:hover {
-            background: linear-gradient(120deg, #F97316, #EAB308);
-            color: #0f172a;
-            font-weight: 700;
-            box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
-            border-color: transparent;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            position: fixed;
-            left: -280px;
-            top: 0;
-            width: 280px;
-            height: 100%;
-            background: rgba(2, 6, 23, 0.96);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 28px 20px;
-            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            z-index: 1000;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 8px 0 30px rgba(0, 0, 0, 0.5);
-            overflow-y: auto;
-        }
-
-        .sidebar.active {
-            left: 0;
-        }
-
-        .sidebar h4 {
-            font-size: 1rem;
-            margin-bottom: 15px;
-            border-left: 4px solid #F97316;
-            padding-left: 12px;
-            font-weight: 600;
-            color: #facc15;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .sidebar button {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            width: 100%;
-            background: #111827;
-            margin: 8px 0;
-            padding: 12px 16px;
-            border: none;
-            color: #f1f5f9;
-            border-radius: 60px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: left;
-        }
-
-        .sidebar button i {
-            width: 20px;
-            font-size: 1rem;
-        }
-
-        .sidebar button:hover {
-            background: #F97316;
-            color: #0a0a0a;
-            transform: translateX(5px);
-        }
-
-        .logout-btn {
-            margin-top: 30px;
-            background: #7f1a1a !important;
-        }
-
-        .logout-btn:hover {
-            background: #b91c1c !important;
-        }
-
-        /* Content */
-        .content {
-            padding: 20px;
-        }
-
-        /* Movies Grid */
-        .movies-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 22px;
-            padding-bottom: 40px;
-        }
-
-        .movie-card {
-            background: #0f172a;
-            border-radius: 24px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 12px 20px -12px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            flex-direction: column;
-            animation: fadeUp 0.5s ease;
-        }
-
+        /* ========== ANIMAÇÕES ========== */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .movie-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(249, 115, 22, 0.4);
-            box-shadow: 0 20px 30px -15px rgba(249, 115, 22, 0.2);
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
-        .movie-card img {
+        /* ========== TELA DE LOGIN ========== */
+        #loginScreen {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(ellipse at 30% 40%, #0f172a 0%, #020617 100%);
+            z-index: 9999;
+        }
+        .login-box {
+            background: rgba(15,23,42,0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 2rem;
+            padding: 2rem 1.5rem;
+            width: min(340px, 85vw);
+            text-align: center;
+            animation: fadeUp 0.5s ease;
+        }
+        .login-logo {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.6rem;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .login-subtitle {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+        .login-input {
             width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-            background: #1e293b;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            background: var(--surface-2);
+            border: 1px solid #334155;
+            border-radius: 60px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
         }
-
-        .card-content {
-            padding: 14px 16px 16px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+        .login-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(232,112,10,0.25);
         }
-
-        .card-title-row {
-            display: flex;
-            justify-content: space-between;
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            border: none;
+            border-radius: 60px;
+            font-weight: 700;
+            color: #0f172a;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .login-btn:active { transform: scale(0.98); }
+        .login-error {
+            min-height: 40px;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #ff6b6b;
+        }
+        .whatsapp-link {
+            display: inline-flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 8px;
+            background: var(--surface-2);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            text-decoration: none;
+            color: var(--text);
+            margin: 12px 0 6px;
+        }
+        .whatsapp-link i { color: #25D366; }
+        .login-footer {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            margin-top: 16px;
         }
 
-        .card-title-row h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            line-height: 1.3;
-            color: #facc15;
-            margin: 0;
+        /* ========== APP PRINCIPAL ========== */
+        #app { min-height: 100vh; }
+
+        /* Topbar */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            background: rgba(10,10,10,0.9);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+        .menu-btn {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            background: var(--surface-2);
+            border-radius: 50%;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        .menu-btn:active { background: var(--accent); color: #000; }
+        .search-input {
             flex: 1;
+            padding: 10px 16px;
+            background: var(--surface);
+            border: 1px solid #2d3a4e;
+            border-radius: 44px;
+            color: #fff;
+            font-size: 0.85rem;
+            outline: none;
+        }
+        .search-input:focus { border-color: var(--accent); }
+        .topbar-logo { font-size: 1.4rem; color: var(--accent); }
+
+        /* Sidebar */
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 260px;
+            height: 100%;
+            background: rgba(8,8,8,0.97);
+            backdrop-filter: blur(24px);
+            border-right: 1px solid var(--border);
+            padding: 24px 16px;
+            overflow-y: auto;
+            z-index: 500;
+            transition: left 0.3s cubic-bezier(0.2,0.9,0.4,1.1);
+        }
+        #sidebar.open { left: 0; }
+        .sidebar-section-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent-light);
+            border-left: 3px solid var(--accent);
+            padding-left: 10px;
+            margin: 20px 0 10px;
+        }
+        .sidebar-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--surface);
+            border: none;
+            border-radius: 40px;
+            color: var(--text);
+            font-size: 0.85rem;
+            cursor: pointer;
+            margin-bottom: 8px;
+            touch-action: manipulation;
+        }
+        .sidebar-btn:active {
+            background: var(--accent);
+            color: #000;
+            transform: translateX(4px);
+        }
+        .sidebar-btn.danger:active { background: #b91c1c; }
+        .sidebar-btn.install { background: var(--accent); color: #000; font-weight: 700; }
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 499;
+        }
+        .sidebar-overlay.show { display: block; }
+
+        /* Categorias (chips) */
+        .categories-bar {
+            display: flex;
+            gap: 8px;
+            padding: 12px 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            background: rgba(0,0,0,0.15);
+            border-bottom: 1px solid var(--border);
+            -webkit-overflow-scrolling: touch;
+        }
+        .categories-bar::-webkit-scrollbar { display: none; }
+        .cat-chip {
+            flex-shrink: 0;
+            padding: 6px 16px;
+            background: var(--surface-2);
+            border: 1px solid transparent;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #cbd5e1;
+            cursor: pointer;
+            white-space: nowrap;
+            touch-action: manipulation;
+        }
+        .cat-chip:active { border-color: var(--accent); color: var(--accent-light); }
+        .cat-chip.active {
+            background: linear-gradient(120deg, var(--accent), var(--accent-light));
+            color: #0f172a;
+            font-weight: 700;
+        }
+
+        /* Grid de filmes/séries */
+        .content { padding: 20px 16px 60px; }
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        @media (min-width: 480px) {
+            .movies-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (min-width: 768px) {
+            .movies-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .movies-grid { grid-template-columns: repeat(5, 1fr); }
+        }
+
+        .skeleton-card {
+            background: var(--surface-2);
+            border-radius: 16px;
+            aspect-ratio: 2/3;
+            animation: pulse 1.5s infinite;
+        }
+        .movie-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
+            transition: transform 0.2s;
+            touch-action: manipulation;
+        }
+        .movie-card:active { transform: scale(0.98); }
+        .card-thumb {
+            position: relative;
+            aspect-ratio: 2/3;
+            overflow: hidden;
+            background: var(--surface-2);
+        }
+        .card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .card-badge {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(4px);
+        }
+        .card-badge.serie { color: #38bdf8; border: 1px solid #38bdf8; }
+        .card-badge.filme { color: #a78bfa; border: 1px solid #a78bfa; }
+        .card-fav {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            font-size: 1rem;
+            background: rgba(0,0,0,0.6);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #eab308;
+            touch-action: manipulation;
+        }
+        .card-fav.active { color: var(--accent); }
+        .card-body { padding: 10px 12px 12px; }
+        .card-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            color: var(--accent-light);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
-        .fav-icon {
-            color: #eab308;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.2s;
-            flex-shrink: 0;
-        }
-
-        .fav-icon:hover {
-            transform: scale(1.2);
-            color: #f97316;
-        }
-
-        .fav-icon.fas {
-            color: #f97316;
-        }
-
-        .movie-meta {
-            font-size: 0.7rem;
-            color: #cbd5e6;
-            margin: 4px 0 8px;
+        .card-meta {
             display: flex;
+            gap: 4px;
             flex-wrap: wrap;
-            gap: 8px;
+            font-size: 0.6rem;
+            margin: 4px 0 6px;
         }
-
-        .movie-meta span {
-            background: #1e293b;
-            padding: 2px 10px;
+        .card-meta span {
+            background: var(--surface-2);
+            padding: 2px 8px;
             border-radius: 20px;
-            display: inline-block;
         }
-
-        .movie-description {
-            font-size: 0.7rem;
-            color: #b9c3d4;
+        .card-desc {
+            font-size: 0.65rem;
+            color: #8c9ab5;
             line-height: 1.4;
-            margin: 8px 0 6px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            flex: 1;
+            margin-bottom: 8px;
         }
-
-        .watch {
-            display: block;
-            background: #F97316;
-            margin-top: auto;
-            padding: 10px 0;
+        .card-watch {
+            padding: 8px 0;
+            background: var(--accent);
             border-radius: 40px;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #0f172a;
-            text-decoration: none;
             text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            letter-spacing: 0.5px;
+            touch-action: manipulation;
         }
-
-        .watch:hover {
-            background: #EAB308;
-            transform: scale(1.02);
-            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
-        }
-
-        .empty-message {
+        .card-watch:active { background: var(--accent-light); transform: scale(0.98); }
+        .empty-state {
             text-align: center;
             padding: 60px 20px;
-            font-size: 1.2rem;
-            color: #94a3b8;
+            color: var(--text-muted);
         }
 
-        /* ========== MODAL DO PLAYER ========== */
-        .video-modal {
-            display: none;
+        /* ========== MODAL DO PLAYER (tamanho Realme Note 60X) ========== */
+        #videoModal {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
-            justify-content: center;
+            z-index: 3000;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(12px);
+            display: flex;
             align-items: center;
+            justify-content: center;
             opacity: 0;
+            pointer-events: none;
             transition: opacity 0.3s;
         }
-
-        .video-modal.active {
+        #videoModal.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .modal-container {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            background: #0b0f1a;
             display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        /* Player wrapper ocupa 45% da altura em retrato (para não esmagar info) */
+        .player-wrapper {
+            position: relative;
+            background: #000;
+            width: 100%;
+            height: 45vh;
+            min-height: 200px;
+            flex-shrink: 0;
+        }
+        #modalVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+        }
+        /* Spinner */
+        .player-spinner {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.5);
+            pointer-events: none;
+        }
+        .player-spinner .spin-ring {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.2);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .player-spinner.hide { display: none; }
+
+        /* Overlay de controles touch */
+        .player-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 12px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.8) 100%);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .player-wrapper:hover .player-overlay,
+        .player-wrapper.show-controls .player-overlay {
             opacity: 1;
         }
-
-        .modal-container {
-            width: 90%;
-            max-width: 1100px;
-            max-height: 90vh;
-            background: #0f172a;
-            border-radius: 32px;
-            overflow-y: auto;
-            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(249, 115, 22, 0.3);
-            animation: fadeInUp 0.3s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-video-wrapper {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background: #000;
-        }
-
-        .modal-video-wrapper video {
-            width: 100%;
-            display: block;
-            max-height: 60vh;
-            background: #000;
-            outline: none;
-        }
-
-        .modal-info {
-            padding: 24px;
-        }
-
-        .modal-header {
+        .overlay-top {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 16px;
-            gap: 20px;
         }
-
-        .modal-header h2 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #FACC15, #F97316);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin: 0;
-            line-height: 1.3;
+        .overlay-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1rem;
+            color: #fff;
+            text-shadow: 0 1px 4px black;
+            max-width: 70%;
         }
-
-        .close-modal {
-            background: #1e293b;
+        .overlay-close {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.15);
             border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
             border-radius: 50%;
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        .overlay-close:active { background: var(--accent); }
+        .overlay-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+        }
+        .ctrl-btn {
             width: 44px;
             height: 44px;
-            transition: all 0.2s;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .close-modal:hover {
-            background: #F97316;
-            transform: rotate(90deg);
-        }
-
-        .series-controls {
-            background: #1e293b;
-            padding: 16px;
-            border-radius: 16px;
-            margin: 16px 0;
-            border: 1px solid #334155;
-        }
-
-        .season-select {
-            background: #0f172a;
-            color: #F97316;
-            border: 1px solid #F97316;
-            padding: 10px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            width: 100%;
-            outline: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-
-        .episodes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .ep-btn {
-            background: #334155;
-            color: white;
+            background: rgba(255,255,255,0.12);
             border: none;
-            padding: 10px 5px;
-            border-radius: 10px;
-            font-size: 0.8rem;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.2s;
-            font-weight: 700;
-            text-align: center;
+            touch-action: manipulation;
         }
-
-        .ep-btn:hover,
-        .ep-btn.active {
-            background: #F97316;
-            color: #000;
-            box-shadow: 0 0 12px rgba(249, 115, 22, 0.5);
-            transform: scale(1.02);
+        .ctrl-btn:active { background: var(--accent); transform: scale(0.95); }
+        .ctrl-btn.play-pause {
+            width: 56px;
+            height: 56px;
+            background: var(--accent);
+            font-size: 1.4rem;
         }
-
-        .modal-description {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 14px;
-            border-radius: 16px;
-            margin: 16px 0;
-            font-size: 0.85rem;
-            line-height: 1.5;
-            color: #cbd5e6;
-        }
-
-        .desc-short { display: inline; }
-        .desc-full { display: none; }
-        .desc-expanded .desc-full { display: inline; }
-        .desc-expanded .desc-short { display: none; }
-
-        .more-link {
-            color: #F97316;
-            font-weight: 700;
-            cursor: pointer;
-            margin-left: 5px;
-            font-size: 0.8rem;
-            transition: all 0.2s;
-        }
-
-        .more-link:hover {
-            text-decoration: underline;
-            color: #EAB308;
-        }
-
-        .modal-details,
-        .modal-cats,
-        .modal-cast {
-            margin-top: 12px;
-            font-size: 0.85rem;
-            color: #cbd5e6;
+        .overlay-bottom {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .progress-container {
+            position: relative;
+            height: 28px;
+            display: flex;
             align-items: center;
+            cursor: pointer;
+            touch-action: none;
+        }
+        .progress-track {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+            position: relative;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 4px;
+            width: 0%;
+        }
+        .progress-thumb {
+            position: absolute;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%) scale(0);
+            width: 14px;
+            height: 14px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 2px solid white;
+            transition: transform 0.1s;
+        }
+        .progress-container:active .progress-thumb {
+            transform: translateX(-50%) translateY(-50%) scale(1);
+        }
+        .overlay-controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
             gap: 8px;
         }
-
-        .modal-cats span {
-            background: #2d3a4e;
-            padding: 4px 12px;
-            border-radius: 30px;
-            display: inline-block;
+        .ctrl-mini {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.8);
+            font-size: 1rem;
+            padding: 6px;
+            min-width: 40px;
+            min-height: 40px;
+            touch-action: manipulation;
+        }
+        .ctrl-mini:active { color: var(--accent-light); }
+        .volume-group { display: flex; align-items: center; gap: 6px; }
+        .volume-slider {
+            width: 70px;
+            height: 3px;
+            -webkit-appearance: none;
+            background: rgba(255,255,255,0.25);
+            border-radius: 3px;
+        }
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+        }
+        .time-display { font-size: 0.7rem; color: rgba(255,255,255,0.8); }
+        .speed-select {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
             font-size: 0.7rem;
-            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 8px;
         }
-
-        .modal-details span {
-            background: #1e293b;
-            padding: 6px 14px;
-            border-radius: 40px;
+        /* Informações do modal */
+        .modal-info {
+            padding: 16px;
+            overflow-y: auto;
+            flex: 1;
         }
-
-        /* Responsivo */
-        @media (max-width: 640px) {
-            .modal-container {
-                width: 95%;
-                border-radius: 24px;
-            }
-            .movies-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 14px;
-            }
-            .modal-header h2 {
-                font-size: 1.2rem;
-            }
+        .modal-meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
         }
-
-        @media (min-width: 1025px) {
-            .movies-grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
+        .modal-meta-row span {
+            background: var(--surface-2);
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
         }
-
-        /* Offline & Update Snackbar */
+        .series-panel {
+            background: rgba(255,255,255,0.04);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        .season-select {
+            width: 100%;
+            padding: 8px;
+            background: var(--surface-3);
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            color: var(--accent);
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+        }
+        .episodes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
+            gap: 6px;
+        }
+        .ep-btn {
+            padding: 8px 4px;
+            background: var(--surface-2);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            text-align: center;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        .ep-btn:active { background: var(--accent); color: #000; }
+        .ep-btn.active { background: var(--accent); color: #000; }
+        .modal-description {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 12px;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            color: #b0bec5;
+            margin-bottom: 12px;
+        }
+        .more-link {
+            color: var(--accent);
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .modal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+        .modal-tags span {
+            background: var(--surface-2);
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+        }
+        .modal-cast {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 6px;
+        }
+        /* Snackbars */
         .snackbar {
             position: fixed;
             bottom: 20px;
-            left: 20px;
-            right: 20px;
-            background: #1e293b;
-            color: #facc15;
-            padding: 12px 20px;
-            border-radius: 60px;
-            text-align: center;
-            font-size: 0.85rem;
-            font-weight: 600;
-            z-index: 3000;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            border-left: 4px solid #F97316;
-            display: none;
-        }
-        .snackbar.show {
-            display: block;
-            animation: fadeUp 0.3s ease;
-        }
-        .install-btn {
-            background: #F97316;
-            border: none;
-            padding: 6px 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--accent-light);
+            padding: 8px 16px;
             border-radius: 40px;
-            margin-left: 12px;
+            font-size: 0.75rem;
+            z-index: 5000;
+            white-space: nowrap;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+        .snackbar.show { display: flex; }
+        .snack-btn {
+            background: var(--accent);
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-weight: 700;
             color: #0f172a;
-            font-weight: bold;
             cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <!-- LOGIN -->
-    <div class="login-screen" id="loginScreen">
+    <!-- LOGIN SCREEN -->
+    <div id="loginScreen">
         <div class="login-box">
-            <h2>🎬 ULTRA CINE</h2>
-            <input type="password" id="keyInput" placeholder="🔑 Chave de acesso" autocomplete="off">
+            <div class="login-logo">ULTRA CINE</div>
+            <div class="login-subtitle">✦ REALME NOTE 60X ✦</div>
+            <input type="password" id="keyInput" class="login-input" placeholder="🔑 Chave de acesso" autocomplete="off">
             <button class="login-btn" id="loginBtn">ENTRAR</button>
-            <div id="error" style="color:#ff6b6b; margin-top:12px; font-size:0.9rem;"></div>
-            <a class="whatsapp-link" id="whatsappBtn" target="_blank">
-                <i class="fab fa-whatsapp"></i> Solicitar Key
-            </a>
-            <div class="login-text">✨ Player integrado • Séries e filmes no mesmo lugar</div>
+            <div id="loginError" class="login-error"></div>
+            <a class="whatsapp-link" id="whatsappBtn" href="#" target="_blank"><i class="fab fa-whatsapp"></i> Solicitar Key</a>
+            <div class="login-footer">📱 Offline · Player touch · Instalável</div>
         </div>
     </div>
 
-    <!-- APP -->
-    <div class="app" id="app">
-        <div class="topbar">
+    <!-- APP PRINCIPAL -->
+    <div id="app" class="hidden">
+        <header class="topbar">
             <div class="menu-btn" id="menuToggleBtn">☰</div>
-            <input type="text" class="search" id="searchInput" placeholder="Buscar filmes ou séries..." autocomplete="off">
-            <i class="fas fa-film logo-icon"></i>
-        </div>
-
-        <div class="categorias-topo" id="topCategories"></div>
-
-        <div class="sidebar" id="sidebar">
-            <h4><i class="fas fa-compass"></i> Navegação</h4>
-            <button id="showAllBtn"><i class="fas fa-home"></i> Início</button>
-            <button id="historyBtn"><i class="fas fa-history"></i> Histórico</button>
-            <button id="favoritesBtn"><i class="fas fa-heart"></i> Favoritos</button>
-            <hr style="margin:24px 0; border-color:#334155;">
-            <h4><i class="fas fa-tags"></i> Categorias</h4>
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar por título, elenco...">
+            <i class="fas fa-film topbar-logo"></i>
+        </header>
+        <nav class="categories-bar" id="topCategories"></nav>
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        <aside id="sidebar">
+            <div class="sidebar-section-title"><i class="fas fa-compass"></i> Navegação</div>
+            <button class="sidebar-btn" id="showAllBtn"><i class="fas fa-home"></i> Início</button>
+            <button class="sidebar-btn" id="historyBtn"><i class="fas fa-history"></i> Histórico</button>
+            <button class="sidebar-btn" id="favoritesBtn"><i class="fas fa-heart"></i> Favoritos</button>
+            <hr style="border-color:#1e293b; margin:16px 0;">
+            <div class="sidebar-section-title"><i class="fas fa-tags"></i> Gêneros</div>
             <div id="sidebarGenres"></div>
-            <button id="installAppBtn" style="background: #F97316; color:#000; margin-top:20px;"><i class="fas fa-download"></i> Instalar App</button>
-            <button id="logoutSidebarBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Sair</button>
-        </div>
-
-        <div class="content">
+            <hr style="border-color:#1e293b; margin:16px 0;">
+            <button class="sidebar-btn install" id="installAppBtn" style="display:none;"><i class="fas fa-download"></i> Instalar App</button>
+            <button class="sidebar-btn danger" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</button>
+        </aside>
+        <main class="content">
             <div id="moviesContainer"></div>
-        </div>
+        </main>
     </div>
 
-    <!-- MODAL PLAYER -->
-    <div class="video-modal" id="videoModal">
+    <!-- MODAL PLAYER (OTIMIZADO PARA REALME NOTE 60X) -->
+    <div id="videoModal" role="dialog" aria-modal="true">
         <div class="modal-container">
-            <div class="modal-video-wrapper">
-                <video id="modalVideo" controls playsinline></video>
+            <div class="player-wrapper" id="playerWrapper">
+                <video id="modalVideo" preload="metadata" playsinline></video>
+                <div class="player-spinner" id="playerSpinner"><div class="spin-ring"></div></div>
+                <div class="player-overlay" id="playerOverlay">
+                    <div class="overlay-top">
+                        <div class="overlay-title" id="overlayTitle"></div>
+                        <button class="overlay-close" id="overlayCloseBtn"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="overlay-center">
+                        <button class="ctrl-btn" id="seekBackBtn"><i class="fas fa-backward"></i></button>
+                        <button class="ctrl-btn play-pause" id="playPauseBtn"><i class="fas fa-play" id="playPauseIcon"></i></button>
+                        <button class="ctrl-btn" id="seekFwdBtn"><i class="fas fa-forward"></i></button>
+                    </div>
+                    <div class="overlay-bottom">
+                        <div class="progress-container" id="progressContainer">
+                            <div class="progress-track"><div class="progress-fill" id="progressFill"></div><div class="progress-thumb" id="progressThumb"></div></div>
+                        </div>
+                        <div class="overlay-controls-row">
+                            <div class="volume-group">
+                                <button class="ctrl-mini" id="muteBtn"><i class="fas fa-volume-up" id="muteIcon"></i></button>
+                                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="1">
+                            </div>
+                            <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
+                            <div style="display:flex; gap:6px;">
+                                <select class="speed-select" id="speedSelect">
+                                    <option value="0.5">0.5x</option><option value="0.75">0.75x</option>
+                                    <option value="1" selected>1x</option><option value="1.25">1.25x</option>
+                                    <option value="1.5">1.5x</option><option value="2">2x</option>
+                                </select>
+                                <button class="ctrl-mini" id="pipBtn"><i class="fas fa-compress-alt"></i></button>
+                                <button class="ctrl-mini" id="fullscreenBtn"><i class="fas fa-expand" id="fsIcon"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-info">
-                <div class="modal-header">
-                    <h2 id="modalTitle"></h2>
-                    <button class="close-modal" id="closeModalBtn"><i class="fas fa-times"></i></button>
-                </div>
-                <div id="seriesControls" class="series-controls" style="display:none;">
+                <div class="modal-meta-row" id="modalMeta"></div>
+                <div class="series-panel" id="seriesPanel" style="display:none;">
+                    <div class="series-panel-title"><i class="fas fa-list"></i> Episódios</div>
                     <select id="seasonSelect" class="season-select"></select>
-                    <div id="episodesList" class="episodes-grid"></div>
+                    <div class="episodes-grid" id="episodesList"></div>
                 </div>
-                <div class="modal-details" id="modalDetails"></div>
-                <div class="modal-cats" id="modalCats"></div>
                 <div class="modal-description" id="modalDesc"></div>
+                <div class="modal-tags" id="modalCats"></div>
                 <div class="modal-cast" id="modalCast"></div>
             </div>
         </div>
     </div>
 
-    <div id="updateSnackbar" class="snackbar">✨ Nova versão disponível! <button id="refreshBtn" class="install-btn">Atualizar</button></div>
-    <div id="offlineSnackbar" class="snackbar">⚠️ Modo offline - catálogo disponível, vídeos exigem conexão.</div>
+    <!-- SNACKBARS -->
+    <div id="updateSnackbar" class="snackbar">✨ Nova versão! <button class="snack-btn" id="refreshBtn">Atualizar</button></div>
+    <div id="offlineSnackbar" class="snackbar">⚠️ Modo offline — vídeos em cache</div>
 
     <script src="filmes.js"></script>
     <script>
         (function(){
-            // PWA Service Worker
-            if('serviceWorker' in navigator){
-                window.addEventListener('load', ()=>{
-                    navigator.serviceWorker.register('./sw.js').then(reg=>{
-                        console.log('SW registrado:', reg);
-                        reg.onupdatefound = ()=>{
-                            const newWorker = reg.installing;
-                            newWorker.onstatechange = ()=>{
-                                if(newWorker.state === 'installed' && navigator.serviceWorker.controller){
-                                    document.getElementById('updateSnackbar').classList.add('show');
-                                }
-                            };
-                        };
-                    }).catch(e=>console.log('SW falhou:', e));
-                });
-            }
+            // ========== CONFIGURAÇÃO ==========
+            const CFG = {
+                key: '1234',
+                whatsappNum: '258858222129',
+                whatsappMsg: 'Olá, quero acesso ao Ultra Cine',
+                sessionDays: 7,
+                maxAttempts: 5,
+                blockMs: 30000
+            };
+
+            // ========== ELEMENTOS ==========
+            const el = id => document.getElementById(id);
+            const loginScreen = el('loginScreen'), app = el('app');
+            const keyInput = el('keyInput'), loginBtn = el('loginBtn'), loginError = el('loginError');
+            const menuToggle = el('menuToggleBtn'), sidebar = el('sidebar'), sidebarOverlay = el('sidebarOverlay');
+            const searchInput = el('searchInput'), topCats = el('topCategories'), sidebarGenres = el('sidebarGenres');
+            const moviesContainer = el('moviesContainer');
+            const showAll = el('showAllBtn'), historyBtn = el('historyBtn'), favBtn = el('favoritesBtn'), logout = el('logoutBtn'), installBtn = el('installAppBtn');
+            const modal = el('videoModal'), modalVideo = el('modalVideo'), spinner = el('playerSpinner');
+            const closeModalBtn = el('overlayCloseBtn'), playPause = el('playPauseBtn'), playIcon = el('playPauseIcon');
+            const seekBack = el('seekBackBtn'), seekFwd = el('seekFwdBtn');
+            const progressContainer = el('progressContainer'), progressFill = el('progressFill'), progressThumb = el('progressThumb');
+            const mute = el('muteBtn'), muteIcon = el('muteIcon'), volumeSlider = el('volumeSlider'), timeDisplay = el('timeDisplay');
+            const speedSelect = el('speedSelect'), pip = el('pipBtn'), fullscreen = el('fullscreenBtn'), fsIcon = el('fsIcon');
+            const seriesPanel = el('seriesPanel'), seasonSelect = el('seasonSelect'), episodesList = el('episodesList');
+            const modalMeta = el('modalMeta'), modalDesc = el('modalDesc'), modalCats = el('modalCats'), modalCast = el('modalCast');
+            const playerWrapper = el('playerWrapper'), overlayTitle = el('overlayTitle');
+            const updateSnack = el('updateSnackbar'), offlineSnack = el('offlineSnackbar');
+
+            // ========== ESTADO ==========
+            let filmes = [], currentFilter = 'todos', activeCats = new Set(), searchText = '';
+            let loginAttempts = 0, loginBlocked = 0;
+            let historico = safeParse('ultraCineHistorico', []), favoritos = safeParse('ultraCineFavoritos', []).map(String);
+            function safeParse(k, f) { try { return JSON.parse(localStorage.getItem(k)) || f; } catch { return f; } }
+            function saveHist() { localStorage.setItem('ultraCineHistorico', JSON.stringify(historico)); }
+            function saveFav() { localStorage.setItem('ultraCineFavoritos', JSON.stringify(favoritos)); }
+            function addHistory(id) { historico = historico.filter(h => h.id !== id); historico.unshift({ id: String(id), ts: Date.now() }); if (historico.length>100) historico.pop(); saveHist(); }
+            function toggleFav(id, e) { if(e) e.stopPropagation(); const sid = String(id); if(favoritos.includes(sid)) favoritos = favoritos.filter(i=>i!==sid); else favoritos.push(sid); saveFav(); refreshView(); }
+
+            // ========== PWA ==========
+            if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(console.warn));
             let deferredPrompt;
-            window.addEventListener('beforeinstallprompt', (e)=>{
-                e.preventDefault();
-                deferredPrompt = e;
-                const installBtn = document.getElementById('installAppBtn');
-                installBtn.style.display = 'flex';
-                installBtn.onclick = ()=>{
-                    deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then(()=>{ installBtn.style.display = 'none'; });
-                };
-            });
-            // Offline detection
-            window.addEventListener('offline', ()=> document.getElementById('offlineSnackbar').classList.add('show'));
-            window.addEventListener('online', ()=> document.getElementById('offlineSnackbar').classList.remove('show'));
+            window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; installBtn.style.display = 'flex'; });
+            installBtn.addEventListener('click', () => { if(deferredPrompt){ deferredPrompt.prompt(); deferredPrompt.userChoice.then(()=>installBtn.style.display='none'); } });
+            window.addEventListener('online', ()=>offlineSnack.classList.remove('show'));
+            window.addEventListener('offline', ()=>offlineSnack.classList.add('show'));
+            if(!navigator.onLine) offlineSnack.classList.add('show');
 
-            const KEY_CORRETA = "1234";
-            const WHATSAPP_NUM = "258858222129";
-            const WHATSAPP_MSG = "Olá, quero acesso ao Ultra Cine";
-            
-            let filmes = [];
-            let currentFilter = "todos";
-            let searchText = "";
-            let historicoItems = [];
-            let favoritosIds = [];
-
-            try {
-                const savedHistory = localStorage.getItem('ultraCineHistorico');
-                historicoItems = savedHistory ? JSON.parse(savedHistory) : [];
-                favoritosIds = (JSON.parse(localStorage.getItem('ultraCineFavoritos') || '[]')).map(String);
-            } catch(e) { console.warn(e); }
-
-            function salvarHistorico() { localStorage.setItem('ultraCineHistorico', JSON.stringify(historicoItems)); }
-            function salvarFavoritos() { localStorage.setItem('ultraCineFavoritos', JSON.stringify(favoritosIds)); }
-
-            function adicionarAoHistorico(id){
-                historicoItems = historicoItems.filter(item => item.id !== id);
-                historicoItems.unshift({ id: String(id), timestamp: Date.now() });
-                if(historicoItems.length > 100) historicoItems.pop();
-                salvarHistorico();
+            // ========== LOGIN ==========
+            function checkSession() { const logged = localStorage.getItem('ultraLogged')==='true', exp = parseInt(localStorage.getItem('ultraExpires')||'0'); return logged && exp > Date.now(); }
+            function doLogin() {
+                const now = Date.now();
+                if(loginBlocked > now) { loginError.innerText = `⏳ Bloqueado ${Math.ceil((loginBlocked-now)/1000)}s`; return; }
+                if(keyInput.value === CFG.key) {
+                    loginAttempts = 0;
+                    localStorage.setItem('ultraLogged','true');
+                    localStorage.setItem('ultraExpires', String(Date.now() + CFG.sessionDays*864e5));
+                    loginScreen.style.display = 'none';
+                    app.classList.remove('hidden');
+                    initApp();
+                } else {
+                    loginAttempts++;
+                    if(loginAttempts >= CFG.maxAttempts) { loginBlocked = Date.now() + CFG.blockMs; loginError.innerText = '❌ Bloqueado 30s'; }
+                    else loginError.innerText = `❌ Chave inválida (${loginAttempts}/${CFG.maxAttempts})`;
+                }
             }
+            loginBtn.addEventListener('click', doLogin);
+            keyInput.addEventListener('keypress', e => { if(e.key==='Enter') doLogin(); });
+            logout.addEventListener('click', () => { localStorage.clear(); location.reload(); });
+            document.getElementById('refreshBtn')?.addEventListener('click',()=>location.reload());
 
-            function normalizarCategorias(raw){
-                if(!raw) return ["Geral"];
-                if(typeof raw === 'string') return raw.split(',').map(c=>c.trim()).filter(Boolean);
-                if(Array.isArray(raw)) return raw;
-                return ["Geral"];
-            }
-
-            function processarDados(dadosBrutos){
-                const agrupados = {};
-                dadosBrutos.forEach(item => {
-                    if(item.tipo === 'serie'){
-                        const nomeBase = item.title.split(" - Episódio")[0].trim();
-                        if(!agrupados[nomeBase]){
-                            agrupados[nomeBase] = {
-                                id: item.id,
-                                title: nomeBase,
-                                tipo: 'serie',
-                                image: item.image,
-                                description: item.description,
-                                release_year: item.release_year,
-                                duration: item.duration,
-                                lang: item.lang,
-                                categories: item.categories,
-                                cast: item.cast,
-                                seasons: { "1": [] }
+            // ========== PROCESSAMENTO DE DADOS ==========
+            function normCats(r) { if(!r) return ['Geral']; if(typeof r==='string') return r.split(',').map(s=>s.trim()).filter(Boolean); if(Array.isArray(r)) return r; return ['Geral']; }
+            function escapeHtml(s) { return String(s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+            function formatDur(d) { return d?.replace(/min/i,'min')||''; }
+            function processData(raw) {
+                const groups = {};
+                raw.forEach(item => {
+                    if(item.tipo === 'serie') {
+                        let base = item.title.split(/\s*[-–]\s*Episódio/i)[0].trim();
+                        if(!groups[base]) {
+                            groups[base] = {
+                                id: item.id, title: base, tipo: 'serie', image: item.image,
+                                description: item.description, release_year: item.release_year,
+                                duration: item.duration, categories: item.categories,
+                                cast: item.cast || [], lang: item.lang, seasons: { '1': [] }
                             };
                         }
-                        const epMatch = item.title.match(/Episódio\s*(\d+)/i);
-                        const epNum = epMatch ? parseInt(epMatch[1],10) : (agrupados[nomeBase].seasons["1"].length+1);
-                        agrupados[nomeBase].seasons["1"].push({ number: epNum, video_url: item.video_url, title: item.title });
+                        let epMatch = item.title.match(/Episódio\s*(\d+)/i);
+                        let epNum = epMatch ? parseInt(epMatch[1],10) : groups[base].seasons['1'].length+1;
+                        groups[base].seasons['1'].push({ number: epNum, title: item.title, video_url: item.video_url });
                     } else {
-                        agrupados[item.id] = { ...item, tipo: 'filme' };
+                        groups[item.id] = { ...item, tipo: 'filme' };
                     }
                 });
-                Object.values(agrupados).forEach(serie => {
-                    if(serie.seasons?.["1"]) serie.seasons["1"].sort((a,b)=>a.number - b.number);
-                });
-                return Object.values(agrupados);
+                Object.values(groups).forEach(s => { if(s.seasons?.['1']) s.seasons['1'].sort((a,b)=>a.number-b.number); });
+                return Object.values(groups);
             }
 
-            function escapeHtml(str){ if(!str) return ''; return String(str).replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-
-            function exibirFilmes(lista){
-                const container = document.getElementById('moviesContainer');
-                if(!lista.length){ container.innerHTML = '<div class="empty-message"><i class="fas fa-film" style="font-size:3rem; opacity:0.3; display:block; margin-bottom:16px;"></i> Nenhum título encontrado</div>'; return; }
+            // ========== RENDER ==========
+            function renderSkeletons(n=12) {
                 let html = '<div class="movies-grid">';
-                lista.forEach(m=>{
-                    const isFav = favoritosIds.includes(m.id);
-                    const desc = (m.description || 'Sinopse não disponível').slice(0,80);
-                    const descFinal = desc.length===80? desc+'...': desc;
-                    const tipoBadge = m.tipo === 'serie' ? '📺 Série' : '🎬 Filme';
-                    const ano = m.release_year || '2025';
-                    html += `<div class="movie-card"><img src="${m.image || 'https://placehold.co/400x600?text=Poster'}" alt="${escapeHtml(m.title)}" loading="lazy" onerror="this.src='https://placehold.co/400x600?text=Sem+Imagem'"><div class="card-content"><div class="card-title-row"><h4 title="${escapeHtml(m.title)}">${escapeHtml(m.title)}</h4><i class="${isFav ? 'fas' : 'far'} fa-heart fav-icon" data-id="${m.id}" onclick="event.stopPropagation(); window.toggleFavorito('${m.id}')"></i></div><div class="movie-meta"><span>${tipoBadge}</span><span>${escapeHtml(ano)}</span></div><div class="movie-description">${escapeHtml(descFinal)}</div><div class="watch" onclick="window.abrirModal('${m.id}')">▶ Assistir</div></div></div>`;
+                for(let i=0;i<n;i++) html += '<div class="skeleton-card"></div>';
+                moviesContainer.innerHTML = html+'</div>';
+            }
+            function renderGrid(list) {
+                if(!list.length) { moviesContainer.innerHTML = '<div class="empty-state"><i class="fas fa-film"></i><p>Nenhum título encontrado</p></div>'; return; }
+                let html = '<div class="movies-grid">';
+                list.forEach((m,idx) => {
+                    const isFav = favoritos.includes(String(m.id));
+                    const badge = m.tipo === 'serie' ? 'serie' : 'filme';
+                    const badgeTxt = m.tipo === 'serie' ? '📺 Série' : '🎬 Filme';
+                    const img = m.image || 'https://placehold.co/400x600?text=Poster';
+                    const desc = (m.description || 'Sinopse não disponível.').slice(0,80);
+                    html += `<div class="movie-card" data-id="${m.id}">
+                        <div class="card-thumb">
+                            <img src="${img}" alt="${escapeHtml(m.title)}" loading="lazy" onerror="this.src='https://placehold.co/400x600?text=Sem+Imagem'">
+                            <div class="card-badge ${badge}">${badgeTxt}</div>
+                            <div class="card-fav ${isFav ? 'active' : ''}" data-id="${m.id}"><i class="${isFav ? 'fas' : 'far'} fa-heart"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title">${escapeHtml(m.title)}</div>
+                            <div class="card-meta">${m.release_year ? `<span>${escapeHtml(m.release_year)}</span>` : ''}${m.lang ? `<span>${escapeHtml(m.lang)}</span>` : ''}${m.duration ? `<span>${escapeHtml(formatDur(m.duration))}</span>` : ''}</div>
+                            <div class="card-desc">${escapeHtml(desc)}</div>
+                            <div class="card-watch" data-id="${m.id}">▶ Assistir</div>
+                        </div>
+                    </div>`;
                 });
-                container.innerHTML = html+'</div>';
+                moviesContainer.innerHTML = html+'</div>';
+                document.querySelectorAll('.card-watch').forEach(btn => btn.addEventListener('click', e => { e.stopPropagation(); openModal(btn.dataset.id); }));
+                document.querySelectorAll('.card-fav').forEach(btn => btn.addEventListener('click', e => toggleFav(btn.dataset.id, e)));
+                document.querySelectorAll('.movie-card').forEach(card => card.addEventListener('click', e => { if(!e.target.closest('.card-watch') && !e.target.closest('.card-fav')) openModal(card.dataset.id); }));
             }
 
-            window.carregarVideo = function(url, btn){
-                const vid = document.getElementById('modalVideo');
-                if(vid.src !== url){ vid.src = url; vid.load(); }
-                vid.play().catch(()=>{});
-                if(btn){ document.querySelectorAll('.ep-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
-            };
-
-            function criarDescricaoExpansivel(texto){
-                if(!texto) texto = 'Sinopse não disponível.';
-                const limite = 120;
-                const expandir = texto.length > limite;
-                const div = document.createElement('div');
-                div.className = 'modal-description';
-                if(!expandir){ div.textContent = texto; return div; }
-                const short = texto.slice(0,limite)+'... ';
-                div.innerHTML = `<span class="desc-short">${escapeHtml(short)}</span><span class="desc-full" style="display:none;">${escapeHtml(texto)}</span><span class="more-link">mais</span>`;
-                const btnMore = div.querySelector('.more-link');
-                btnMore.addEventListener('click', (e)=>{
-                    e.stopPropagation();
-                    div.classList.toggle('desc-expanded');
-                    const expanded = div.classList.contains('desc-expanded');
-                    btnMore.textContent = expanded ? 'menos' : 'mais';
-                    div.querySelector('.desc-full').style.display = expanded ? 'inline' : 'none';
-                    div.querySelector('.desc-short').style.display = expanded ? 'none' : 'inline';
-                });
-                return div;
+            function getFiltered() {
+                let list = [...filmes];
+                if(currentFilter === '__favoritos__') list = list.filter(m => favoritos.includes(String(m.id)));
+                else if(currentFilter === '__historico__') list = historico.map(h=>filmes.find(f=>f.id===h.id)).filter(Boolean);
+                else if(activeCats.size) list = list.filter(m => normCats(m.categories).some(c => activeCats.has(c)));
+                if(searchText.trim()) { const q = searchText.toLowerCase(); list = list.filter(m => m.title.toLowerCase().includes(q) || (m.description||'').toLowerCase().includes(q) || (m.cast||[]).some(a=>a.toLowerCase().includes(q))); }
+                return list;
+            }
+            function refreshView() { renderGrid(getFiltered()); syncChips(); }
+            function filterByCat(cat, multi) {
+                if(cat === 'todos') { activeCats.clear(); currentFilter = 'todos'; }
+                else { if(multi) { if(activeCats.has(cat)) activeCats.delete(cat); else activeCats.add(cat); } else { activeCats.clear(); activeCats.add(cat); } currentFilter = 'categoria'; }
+                searchText = ''; searchInput.value = ''; refreshView(); closeSidebar();
+            }
+            function syncChips() { topCats.querySelectorAll('.cat-chip').forEach(btn => { const c = btn.dataset.cat; if(c==='todos') btn.classList.toggle('active', currentFilter==='todos' && activeCats.size===0); else btn.classList.toggle('active', activeCats.has(c)); }); }
+            function buildCategories() {
+                const set = new Set(); filmes.forEach(m => normCats(m.categories).forEach(c=>set.add(c))); const cats = [...set].sort();
+                topCats.innerHTML = `<button class="cat-chip active" data-cat="todos">🎞️ Todos</button>` + cats.map(c=>`<button class="cat-chip" data-cat="${escapeHtml(c)}">${escapeHtml(c)}</button>`).join('');
+                topCats.querySelectorAll('.cat-chip').forEach(btn => btn.addEventListener('click',()=>filterByCat(btn.dataset.cat, true)));
+                sidebarGenres.innerHTML = cats.map(c=>`<button class="sidebar-btn" data-cat="${escapeHtml(c)}"><i class="fas fa-tag"></i> ${escapeHtml(c)}</button>`).join('');
+                sidebarGenres.querySelectorAll('.sidebar-btn').forEach(btn => btn.addEventListener('click',()=>filterByCat(btn.dataset.cat, false)));
             }
 
-            window.abrirModal = function(id){
-                const item = filmes.find(f=>f.id === id);
-                if(!item) return;
-                adicionarAoHistorico(id);
-                const modal = document.getElementById('videoModal');
-                const vid = document.getElementById('modalVideo');
-                vid.pause(); vid.src = '';
-                document.getElementById('modalTitle').innerText = item.title;
-                const oldDesc = document.getElementById('modalDesc');
-                const novaDesc = criarDescricaoExpansivel(item.description);
-                oldDesc.replaceWith(novaDesc);
-                novaDesc.id = 'modalDesc';
-                document.getElementById('modalCast').innerHTML = (item.cast && item.cast.length) ? `<i class="fas fa-user-friends"></i> Elenco: ${item.cast.join(', ')}` : '';
-                const cats = normalizarCategorias(item.categories);
-                document.getElementById('modalCats').innerHTML = cats.length ? `<i class="fas fa-tags"></i> ${cats.map(c=>`<span>${escapeHtml(c)}</span>`).join('')}` : '';
-                const seriesControls = document.getElementById('seriesControls');
-                if(item.tipo === 'serie' && item.seasons){
-                    seriesControls.style.display = 'block';
-                    document.getElementById('seasonSelect').innerHTML = '<option>Temporada 1</option>';
-                    const eps = item.seasons["1"] || [];
-                    document.getElementById('episodesList').innerHTML = eps.map(ep=>`<button class="ep-btn" data-url="${ep.video_url}">EP ${ep.number}</button>`).join('');
-                    if(eps.length) window.carregarVideo(eps[0].video_url, document.querySelector('#episodesList .ep-btn'));
-                    document.querySelectorAll('#episodesList .ep-btn').forEach(btn=>{ btn.addEventListener('click',()=>{ window.carregarVideo(btn.dataset.url, btn); }); });
-                } else {
-                    seriesControls.style.display = 'none';
-                    window.carregarVideo(item.video_url);
-                }
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            };
+            // ========== SIDEBAR ==========
+            function openSidebar() { sidebar.classList.add('open'); sidebarOverlay.classList.add('show'); }
+            function closeSidebar() { sidebar.classList.remove('open'); sidebarOverlay.classList.remove('show'); }
+            menuToggle.addEventListener('click', e => { e.stopPropagation(); sidebar.classList.contains('open') ? closeSidebar() : openSidebar(); });
+            sidebarOverlay.addEventListener('click', closeSidebar);
+            showAll.addEventListener('click', () => { currentFilter='todos'; activeCats.clear(); refreshView(); closeSidebar(); });
+            historyBtn.addEventListener('click', () => { currentFilter='__historico__'; activeCats.clear(); refreshView(); closeSidebar(); });
+            favBtn.addEventListener('click', () => { currentFilter='__favoritos__'; activeCats.clear(); refreshView(); closeSidebar(); });
+            searchInput.addEventListener('input', e => { searchText = e.target.value; refreshView(); });
 
-            function refreshView(){
-                let toShow = [];
-                if(currentFilter === '__favoritos__') toShow = filmes.filter(m=>favoritosIds.includes(m.id));
-                else if(currentFilter === '__historico__') toShow = historicoItems.map(h=>filmes.find(f=>f.id === h.id)).filter(Boolean);
-                else if(currentFilter !== 'todos') toShow = filmes.filter(m=>normalizarCategorias(m.categories).includes(currentFilter));
-                else toShow = [...filmes];
-                if(searchText.trim()){ const termo = searchText.toLowerCase(); toShow = toShow.filter(m=>m.title.toLowerCase().includes(termo)); }
-                exibirFilmes(toShow);
-                document.querySelectorAll('#topCategories button, #sidebarGenres button').forEach(btn=>{ const cat = btn.dataset.cat; btn.classList.toggle('active-cat', cat === currentFilter); });
+            // ========== PLAYER (ANDROID TOUCH) ==========
+            let controlsTimer;
+            function showControls() { playerWrapper.classList.add('show-controls'); clearTimeout(controlsTimer); if(!modalVideo.paused) controlsTimer = setTimeout(()=>playerWrapper.classList.remove('show-controls'), 3000); }
+            playerWrapper.addEventListener('mousemove', showControls);
+            playerWrapper.addEventListener('touchstart', ()=>playerWrapper.classList.toggle('show-controls'), {passive:true});
+            function syncPlayIcon() { playIcon.className = modalVideo.paused ? 'fas fa-play' : 'fas fa-pause'; }
+            playPause.addEventListener('click', ()=>{ if(modalVideo.paused) modalVideo.play().catch(()=>{}); else modalVideo.pause(); });
+            modalVideo.addEventListener('play', ()=>{ syncPlayIcon(); showControls(); });
+            modalVideo.addEventListener('pause', ()=>{ syncPlayIcon(); playerWrapper.classList.add('show-controls'); });
+            seekBack.addEventListener('click', ()=>modalVideo.currentTime = Math.max(0, modalVideo.currentTime-10));
+            seekFwd.addEventListener('click', ()=>modalVideo.currentTime = Math.min(modalVideo.duration||0, modalVideo.currentTime+10));
+            modalVideo.addEventListener('click', ()=>{ if(modalVideo.paused) modalVideo.play().catch(()=>{}); else modalVideo.pause(); showControls(); });
+            modalVideo.addEventListener('dblclick', ()=>toggleFullscreen());
+            function formatTime(s) { if(isNaN(s)) return '0:00'; const h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = Math.floor(s%60); return h>0 ? `${h}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}` : `${m}:${String(sec).padStart(2,'0')}`; }
+            modalVideo.addEventListener('timeupdate', () => {
+                if(!modalVideo.duration) return;
+                let pct = (modalVideo.currentTime / modalVideo.duration)*100;
+                progressFill.style.width = pct+'%'; progressThumb.style.left = pct+'%';
+                timeDisplay.textContent = `${formatTime(modalVideo.currentTime)} / ${formatTime(modalVideo.duration)}`;
+            });
+            function seekFrom(e) { const rect = progressContainer.getBoundingClientRect(); const clientX = e.touches ? e.touches[0].clientX : e.clientX; let ratio = (clientX - rect.left)/rect.width; ratio = Math.min(1, Math.max(0, ratio)); if(modalVideo.duration) modalVideo.currentTime = ratio * modalVideo.duration; }
+            progressContainer.addEventListener('click', seekFrom);
+            let dragging = false;
+            progressContainer.addEventListener('mousedown', e=>{ dragging=true; seekFrom(e); });
+            document.addEventListener('mousemove', e=>{ if(dragging) seekFrom(e); });
+            document.addEventListener('mouseup', ()=>dragging=false);
+            progressContainer.addEventListener('touchstart', e=>{ dragging=true; seekFrom(e); }, {passive:true});
+            document.addEventListener('touchmove', e=>{ if(dragging) seekFrom(e); }, {passive:true});
+            document.addEventListener('touchend', ()=>dragging=false);
+            modalVideo.addEventListener('waiting', ()=>spinner.classList.remove('hide'));
+            modalVideo.addEventListener('playing', ()=>spinner.classList.add('hide'));
+            modalVideo.addEventListener('canplay', ()=>spinner.classList.add('hide'));
+            volumeSlider.addEventListener('input', ()=>{ modalVideo.volume = parseFloat(volumeSlider.value); modalVideo.muted = modalVideo.volume===0; syncMuteIcon(); });
+            mute.addEventListener('click', ()=>{ modalVideo.muted = !modalVideo.muted; if(!modalVideo.muted && modalVideo.volume===0){ modalVideo.volume=0.5; volumeSlider.value='0.5'; } syncMuteIcon(); });
+            function syncMuteIcon() { if(modalVideo.muted || modalVideo.volume===0) muteIcon.className = 'fas fa-volume-mute'; else if(modalVideo.volume<0.5) muteIcon.className = 'fas fa-volume-down'; else muteIcon.className = 'fas fa-volume-up'; }
+            speedSelect.addEventListener('change', ()=>modalVideo.playbackRate = parseFloat(speedSelect.value));
+            pip.addEventListener('click', ()=>{ if(document.pictureInPictureElement) document.exitPictureInPicture(); else if(modalVideo.requestPictureInPicture) modalVideo.requestPictureInPicture(); });
+            function toggleFullscreen() { const el = playerWrapper; if(!document.fullscreenElement) (el.requestFullscreen||el.webkitRequestFullscreen).call(el); else (document.exitFullscreen||document.webkitExitFullscreen).call(document); }
+            fullscreen.addEventListener('click', toggleFullscreen);
+            document.addEventListener('fullscreenchange', ()=> fsIcon.className = document.fullscreenElement ? 'fas fa-compress' : 'fas fa-expand');
+            document.addEventListener('keydown', e => { if(!modal.classList.contains('open')) return; const tag = document.activeElement.tagName; if(tag==='INPUT'||tag==='SELECT') return; switch(e.key){ case ' ': case 'k': e.preventDefault(); if(modalVideo.paused) modalVideo.play().catch(()=>{}); else modalVideo.pause(); break; case 'ArrowLeft': e.preventDefault(); seekBack.click(); break; case 'ArrowRight': e.preventDefault(); seekFwd.click(); break; case 'ArrowUp': e.preventDefault(); modalVideo.volume = Math.min(1, modalVideo.volume+0.1); volumeSlider.value = modalVideo.volume; syncMuteIcon(); break; case 'ArrowDown': e.preventDefault(); modalVideo.volume = Math.max(0, modalVideo.volume-0.1); volumeSlider.value = modalVideo.volume; syncMuteIcon(); break; case 'm': modalVideo.muted = !modalVideo.muted; syncMuteIcon(); break; case 'f': toggleFullscreen(); break; case 'Escape': closeModal(); break; } });
+            function buildDesc(text) { if(!text) text = 'Sinopse não disponível.'; const limit = 160; if(text.length <= limit) { modalDesc.textContent = text; return; } const short = text.slice(0,limit); modalDesc.innerHTML = `<span class="desc-short">${escapeHtml(short)}… </span><span class="desc-full" style="display:none">${escapeHtml(text)}</span><span class="more-link">mais</span>`; const more = modalDesc.querySelector('.more-link'); more.addEventListener('click', ()=>{ const expanded = modalDesc.dataset.expanded === '1'; modalDesc.dataset.expanded = expanded ? '0' : '1'; modalDesc.querySelector('.desc-short').style.display = expanded ? '' : 'none'; modalDesc.querySelector('.desc-full').style.display = expanded ? 'none' : ''; more.textContent = expanded ? 'mais' : 'menos'; }); }
+            function loadEpisode(ep, btn) { if(modalVideo.src !== ep.video_url) { modalVideo.src = ep.video_url; modalVideo.load(); } modalVideo.play().catch(()=>{}); overlayTitle.textContent = ep.title; document.querySelectorAll('.ep-btn').forEach(b=>b.classList.remove('active')); if(btn) btn.classList.add('active'); }
+            function openModal(id) {
+                const item = filmes.find(f=> f.id === id || String(f.id)===String(id)); if(!item) return;
+                addHistory(id); modalVideo.pause(); modalVideo.src = ''; spinner.classList.remove('hide'); speedSelect.value='1'; modalVideo.playbackRate=1; overlayTitle.textContent = item.title;
+                const metas = [item.release_year && `📅 ${escapeHtml(item.release_year)}`, item.duration && `⏱ ${escapeHtml(formatDur(item.duration))}`, item.lang && `🌐 ${escapeHtml(item.lang)}`, item.tipo==='serie' ? '📺 Série' : '🎬 Filme'].filter(Boolean);
+                modalMeta.innerHTML = metas.map(m=>`<span>${m}</span>`).join('');
+                if(item.tipo === 'serie' && item.seasons) {
+                    seriesPanel.style.display = 'block';
+                    seasonSelect.innerHTML = Object.keys(item.seasons).map(s=>`<option value="${s}">Temporada ${s}</option>`).join('');
+                    const renderEps = (season) => {
+                        const eps = item.seasons[season]||[];
+                        episodesList.innerHTML = eps.map(ep=>`<div class="ep-btn" data-url="${ep.video_url}" data-title="${escapeHtml(ep.title)}">EP ${ep.number}</div>`).join('');
+                        episodesList.querySelectorAll('.ep-btn').forEach(btn=> btn.addEventListener('click',()=>loadEpisode({video_url:btn.dataset.url, title:btn.dataset.title}, btn)));
+                        if(eps.length) { const first = episodesList.querySelector('.ep-btn'); loadEpisode(eps[0], first); }
+                    };
+                    seasonSelect.addEventListener('change',()=>renderEps(seasonSelect.value));
+                    renderEps('1');
+                } else { seriesPanel.style.display = 'none'; modalVideo.src = item.video_url||''; modalVideo.load(); modalVideo.play().catch(()=>{}); }
+                buildDesc(item.description);
+                const cats = normCats(item.categories); modalCats.innerHTML = cats.map(c=>`<span>🏷 ${escapeHtml(c)}</span>`).join('');
+                if(item.cast && item.cast.length) modalCast.innerHTML = `<i class="fas fa-users"></i> ${escapeHtml(item.cast.join(', '))}`; else modalCast.innerHTML = '';
+                modal.classList.add('open'); document.body.style.overflow = 'hidden';
             }
+            function closeModal() { modal.classList.remove('open'); modalVideo.pause(); modalVideo.src = ''; document.body.style.overflow = ''; }
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+            // Swipe down to close
+            let touchStart = 0;
+            modal.addEventListener('touchstart', e=>{ if(e.target===modal) touchStart = e.touches[0].clientY; });
+            modal.addEventListener('touchmove', e=>{ if(e.target===modal && touchStart && e.touches[0].clientY - touchStart > 70) { closeModal(); touchStart=0; } });
 
-            window.filtrar = (categoria)=>{ currentFilter = categoria; searchText = ''; document.getElementById('searchInput').value = ''; refreshView(); };
-            window.toggleFavorito = function(id){
-                const strId = String(id);
-                if(favoritosIds.includes(strId)) favoritosIds = favoritosIds.filter(i=>i !== strId);
-                else favoritosIds.push(strId);
-                salvarFavoritos();
-                refreshView();
-            };
-
-            function gerarBotoesCategorias(){
-                const categoriesSet = new Set();
-                filmes.forEach(m=>{ normalizarCategorias(m.categories).forEach(c=>categoriesSet.add(c)); });
-                const catsOrdenadas = [...categoriesSet].sort();
-                document.getElementById('topCategories').innerHTML = '<button data-cat="todos" class="active-cat">🎞️ Todos</button>' + catsOrdenadas.map(c=>`<button data-cat="${c}">${escapeHtml(c)}</button>`).join('');
-                document.getElementById('sidebarGenres').innerHTML = catsOrdenadas.map(c=>`<button data-cat="${c}"><i class="fas fa-tag"></i> ${escapeHtml(c)}</button>`).join('');
-                document.querySelectorAll('#topCategories button, #sidebarGenres button').forEach(btn=>{
-                    btn.addEventListener('click',()=>{ window.filtrar(btn.dataset.cat); document.getElementById('sidebar').classList.remove('active'); });
-                });
+            // ========== INICIALIZAÇÃO ==========
+            function initApp() {
+                if(!window.FILMES_JSON || !Array.isArray(window.FILMES_JSON)) { moviesContainer.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Erro no catálogo</p></div>'; return; }
+                renderSkeletons();
+                setTimeout(()=>{ filmes = processData(window.FILMES_JSON); buildCategories(); refreshView(); }, 150);
             }
-
-            function inicializarApp(){
-                if(!window.FILMES_JSON || !Array.isArray(window.FILMES_JSON)){ document.getElementById('moviesContainer').innerHTML = '<div class="empty-message">Erro ao carregar catálogo.</div>'; return; }
-                filmes = processarDados(window.FILMES_JSON);
-                gerarBotoesCategorias();
-                refreshView();
-            }
-
-            document.getElementById('searchInput').addEventListener('input', e=>{ searchText = e.target.value; refreshView(); });
-            document.getElementById('closeModalBtn').addEventListener('click',()=>{ const modal = document.getElementById('videoModal'); document.getElementById('modalVideo').pause(); document.getElementById('modalVideo').src = ''; modal.classList.remove('active'); document.body.style.overflow = ''; });
-            document.getElementById('videoModal').addEventListener('click', e=>{ if(e.target === document.getElementById('videoModal')) document.getElementById('closeModalBtn').click(); });
-            document.getElementById('showAllBtn').addEventListener('click',()=>window.filtrar('todos'));
-            document.getElementById('favoritesBtn').addEventListener('click',()=>window.filtrar('__favoritos__'));
-            document.getElementById('historyBtn').addEventListener('click',()=>window.filtrar('__historico__'));
-            document.getElementById('logoutSidebarBtn').addEventListener('click',()=>{ localStorage.clear(); sessionStorage.clear(); location.reload(); });
-            const sidebar = document.getElementById('sidebar');
-            document.getElementById('menuToggleBtn').addEventListener('click', e=>{ e.stopPropagation(); sidebar.classList.toggle('active'); });
-            document.addEventListener('click', e=>{ if(sidebar.classList.contains('active') && !sidebar.contains(e.target) && !document.getElementById('menuToggleBtn').contains(e.target)) sidebar.classList.remove('active'); });
-
-            function verificarLogin(){
-                if(localStorage.getItem('ultraLogged') === 'true'){
-                    document.getElementById('loginScreen').style.display = 'none';
-                    document.getElementById('app').style.display = 'block';
-                    if(window.FILMES_JSON) inicializarApp();
-                    else window.addEventListener('load', inicializarApp);
-                } else {
-                    document.getElementById('loginScreen').style.display = 'flex';
-                    document.getElementById('app').style.display = 'none';
-                }
-            }
-            function fazerLogin(){
-                const input = document.getElementById('keyInput');
-                const erro = document.getElementById('error');
-                if(input.value === KEY_CORRETA){
-                    localStorage.setItem('ultraLogged', 'true');
-                    verificarLogin();
-                } else { erro.textContent = '❌ Chave inválida!'; }
-            }
-            document.getElementById('loginBtn').addEventListener('click', fazerLogin);
-            document.getElementById('keyInput').addEventListener('keypress', e=>{ if(e.key === 'Enter') fazerLogin(); });
-            document.getElementById('whatsappBtn').addEventListener('click', e=>{ e.preventDefault(); window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(WHATSAPP_MSG)}`, '_blank'); });
-            document.getElementById('refreshBtn').addEventListener('click',()=>{ window.location.reload(); });
-            window.addEventListener('DOMContentLoaded', verificarLogin);
-            if(window.FILMES_JSON && localStorage.getItem('ultraLogged') === 'true') inicializarApp();
+            if(checkSession()) { loginScreen.style.display = 'none'; app.classList.remove('hidden'); initApp(); }
+            else { loginScreen.style.display = 'flex'; app.classList.add('hidden'); }
         })();
     </script>
 </body>

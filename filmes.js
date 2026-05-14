@@ -1,5 +1,5 @@
-window.FILMES_JSON = [
-   {
+window.FILMES_JSON =  [
+  {
     "tipo": "serie",
     "id": "6184",
     "title": "Caçador de Demônios - Episódio 1 - Pot O'Gold",
@@ -1509,4 +1509,4 @@ window.FILMES_JSON = [
     "cast": [],
     "lang": "Português"
   }
-];
+]

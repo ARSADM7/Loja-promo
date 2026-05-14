@@ -1,28 +1,27 @@
 {
   "name": "Ultra Cine",
-  "short_name": "UltraCine",
-  "description": "Assista séries e filmes com player integrado e suporte offline",
+  "short_name": "UCine",
+  "description": "Assista séries e filmes offline com cache inteligente",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#F97316",
-  "background_color": "#030712",
+  "theme_color": "#e8700a",
+  "background_color": "#0a0a0a",
   "orientation": "portrait",
   "scope": "/",
   "icons": [
     {
-      "src": "icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "icon.svg",
+      "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "screenshots": [],
   "categories": ["entertainment", "video"],
   "lang": "pt-BR"
 }

@@ -1,37 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
-  <rect width="512" height="512" rx="96" fill="url(#bgGradient)"/>
-  <defs>
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#F97316"/>
-      <stop offset="100%" style="stop-color:#EAB308"/>
-    </linearGradient>
-    <clipPath id="clip">
-      <rect x="80" y="140" width="352" height="232" rx="16"/>
-    </clipPath>
-  </defs>
-  
-  <!-- Claquete / Filme -->
-  <g transform="translate(256, 256)">
-    <!-- Corpo da câmera / projetor -->
-    <rect x="-120" y="-60" width="240" height="120" rx="20" fill="#1e1b2e" stroke="#FFD966" stroke-width="6"/>
-    <!-- Lente central -->
-    <circle cx="0" cy="0" r="40" fill="#0f172a" stroke="#FACC15" stroke-width="5"/>
-    <circle cx="0" cy="0" r="18" fill="#38bdf8" stroke="#FACC15" stroke-width="2"/>
-    <!-- Flash / detalhe -->
-    <rect x="70" y="-35" width="30" height="18" rx="4" fill="#FACC15"/>
-    <rect x="70" y="5" width="30" height="18" rx="4" fill="#FACC15"/>
-    <!-- Tripé / base -->
-    <rect x="-30" y="70" width="60" height="16" rx="8" fill="#F97316"/>
-    <!-- Faixa de filme sobre a lente -->
-    <rect x="-100" y="-88" width="200" height="14" rx="7" fill="#111827" opacity="0.9"/>
-    <circle cx="-80" cy="-81" r="3" fill="#FACC15"/>
-    <circle cx="-60" cy="-81" r="3" fill="#FACC15"/>
-    <circle cx="-40" cy="-81" r="3" fill="#FACC15"/>
-    <circle cx="-20" cy="-81" r="3" fill="#FACC15"/>
-    <circle cx="0" cy="-81" r="3" fill="#FACC15"/>
-    <circle cx="20" cy="-81" r="3" fill="#FACC15"/>
-    <circle cx="40" cy="-81" r="3" fill="#FACC15"/>
-    <circle cx="60" cy="-81" r="3" fill="#FACC15"/>
-    <circle cx="80" cy="-81" r="3" fill="#FACC15"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="url(#g)"/>
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#e8700a"/><stop offset="100%" stop-color="#f5c842"/></linearGradient></defs>
+  <circle cx="256" cy="256" r="100" fill="#0f172a"/>
+  <circle cx="256" cy="256" r="40" fill="#38bdf8"/>
+  <rect x="336" y="220" width="40" height="24" rx="6" fill="#f5c842"/>
+  <rect x="336" y="268" width="40" height="24" rx="6" fill="#f5c842"/>
+  <rect x="180" y="360" width="90" height="20" rx="10" fill="#e8700a"/>
 </svg>

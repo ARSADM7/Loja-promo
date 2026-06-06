@@ -737,16 +737,17 @@ import {
   query, where, getDocs, updateDoc, onSnapshot, serverTimestamp
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
-// ==================== FIREBASE CONFIG (SUBSTITUIR) ====================
+// ==================== FIREBASE CONFIG (REAL - painel-testar-v1) ====================
 const firebaseConfig = {
-  apiKey: "AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-  authDomain: "seu-projeto.firebaseapp.com",
-  projectId: "seu-projeto",
-  storageBucket: "seu-projeto.appspot.com",
-  messagingSenderId: "000000000000",
-  appId: "1:000000000000:web:xxxxxxxxxxxxxxxx"
+  apiKey: "AIzaSyCYlgvsOR-FKCuAg6YEYYGsDEYlCte1LnE",
+  authDomain: "painel-testar-v1.firebaseapp.com",
+  projectId: "painel-testar-v1",
+  storageBucket: "painel-testar-v1.firebasestorage.app",
+  messagingSenderId: "866531095645",
+  appId: "1:866531095645:web:d81898560794ab16ba89b4",
+  measurementId: "G-5TH8LMBJ3H"
 };
-// ======================================================================
+// ===================================================================================
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -889,8 +890,8 @@ window.doRegister = async function() {
       timestamp: serverTimestamp(), userId: uid, userEmail: email
     });
 
-    toast('Conta criada! Aguarde aprovação do administrador.', 'success');
-    // O onAuthStateChanged cuidará de redirecionar para welcome (status inactive)
+    window.toast('Conta criada! Aguarde aprovação do administrador.', 'success');
+    // onAuthStateChanged cuidará de redirecionar para welcome (status inactive)
   } catch (err) {
     let msg = 'Erro ao criar conta.';
     if (err.code === 'auth/email-already-in-use') msg = 'Este e-mail já está cadastrado.';

@@ -1,61 +1,42 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Player TS</title>
 
-<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-
-<title>Player Plyr</title>
+<script src="https://cdn.jsdelivr.net/npm/mpegts.js@latest"></script>
 
 <style>
-body{
-    margin:0;
-    background:#000;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
-
-.container{
-    width:100%;
-    max-width:1200px;
-}
-
-video{
-    width:100%;
-}
+body { background: black; text-align: center; }
+video { width: 90%; max-width: 800px; margin-top: 20px; }
 </style>
 </head>
+
 <body>
 
-<div class="container">
-    <video id="player" playsinline controls>
-        <source src="http://cinetop.co.mz:8330/film/CacadordeDemoniosEpisode1PotOGold.mp4" type="video/mp4">
-    </video>
-</div>
+<h2 style="color:white;">Player MPEG-TS</h2>
 
-<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<video id="video" controls autoplay></video>
 
 <script>
-const player = new Plyr('#player', {
-    controls: [
-        'play-large',
-        'rewind',
-        'play',
-        'fast-forward',
-        'progress',
-        'current-time',
-        'duration',
-        'mute',
-        'volume',
-        'settings',
-        'pip',
-        'airplay',
-        'fullscreen'
-    ]
-});
+const video = document.getElementById('video');
+
+if (mpegts.getFeatureList().mseLivePlayback) {
+
+    const player = mpegts.createPlayer({
+        type: 'mpegts',
+        isLive: true, // MUITO IMPORTANTE
+        url: 'https://dns.p2.wtf/rogerio55x/24992611250/100'
+    });
+
+    player.attachMediaElement(video);
+    player.load();
+    player.play();
+
+} else {
+    alert("Seu navegador não suporta MPEG-TS");
+}
 </script>
 
 </body>
